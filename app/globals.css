@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -19,8 +19,60 @@
   }
 }
 
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#__next {
+  height: 100%;
+}
+
+/* Remove default button styles */
+button {
+  border: none;
+  cursor: pointer;
+}
+
+/* Links styling */
+a {
+  text-decoration: none;
+}
+
+/* Glass Panel effect */
+.glass-panel {
+  background: rgba(19, 19, 19, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+/* Font families */
+.font-headline {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.font-label {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Scrolling animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

@@ -16,6 +16,24 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Contact form setup (Gmail SMTP)
+
+To make the contact form send real emails, configure these variables in `.env`:
+
+```bash
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=
+SMTP_PASS=
+CONTACT_TO_EMAIL=
+CONTACT_FROM_EMAIL=
+CONTACT_FROM_NAME=Contacto Portafolio
+```
+
+- `CONTACT_TO_EMAIL`: destination inbox where messages arrive.
+- `CONTACT_FROM_EMAIL`: sender address used by your SMTP provider (optional; defaults to `SMTP_USER`).
+- `CONTACT_FROM_NAME`: display name shown as sender.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

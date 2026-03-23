@@ -15,10 +15,33 @@ import { useEffect, useRef, useState } from "react";
 export default function ParticleText({ text }: { text: string }) {
   const canvasRef    = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const isHoveredRef = useRef(false);
 
   useEffect(() => { isHoveredRef.current = isHovered; }, [isHovered]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+
+    const updateTouchMode = () => {
+      const touchMode = mediaQuery.matches;
+      setIsTouchDevice(touchMode);
+      if (!touchMode) {
+        setIsHovered(false);
+      }
+    };
+
+    updateTouchMode();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateTouchMode);
+      return () => mediaQuery.removeEventListener("change", updateTouchMode);
+    }
+
+    mediaQuery.addListener(updateTouchMode);
+    return () => mediaQuery.removeListener(updateTouchMode);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -196,10 +219,17 @@ export default function ParticleText({ text }: { text: string }) {
     <div
       ref={containerRef}
       className="w-full relative cursor-crosshair h-[12vw] sm:h-[10vw] md:h-[150px] scale-105"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={() => setIsHovered(true)}
-      onTouchEnd={() => setIsHovered(false)}
+      onMouseEnter={() => {
+        if (!isTouchDevice) setIsHovered(true);
+      }}
+      onMouseLeave={() => {
+        if (!isTouchDevice) setIsHovered(false);
+      }}
+      onTouchStart={(event) => {
+        if (!isTouchDevice) return;
+        event.preventDefault();
+        setIsHovered((current) => !current);
+      }}
     >
       <canvas
         ref={canvasRef}

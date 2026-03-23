@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { translations, Language } from "../i18n/translations";
 import { Mail, Phone, Github, Linkedin } from "lucide-react";
@@ -21,6 +21,9 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function Contact({ language }: { language: Language }) {
   const t = translations[language].contact;
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [openedContactKey, setOpenedContactKey] = useState<string | null>(null);
+  const contactListRef = useRef<HTMLDivElement>(null);
 
   const [contactForm, setContactForm] = useState<ContactFormData>({
     email: "",
@@ -29,6 +32,64 @@ export default function Contact({ language }: { language: Language }) {
   });
   const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [contactStatusMessage, setContactStatusMessage] = useState("");
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+
+    const updateTouchMode = () => {
+      const touchMode = mediaQuery.matches;
+      setIsTouchDevice(touchMode);
+      if (!touchMode) {
+        setOpenedContactKey(null);
+      }
+    };
+
+    updateTouchMode();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateTouchMode);
+      return () => mediaQuery.removeEventListener("change", updateTouchMode);
+    }
+
+    mediaQuery.addListener(updateTouchMode);
+    return () => mediaQuery.removeListener(updateTouchMode);
+  }, []);
+
+  useEffect(() => {
+    if (!isTouchDevice || !openedContactKey) return;
+
+    const handleOutsideTouch = (event: TouchEvent) => {
+      if (!contactListRef.current) return;
+      if (!contactListRef.current.contains(event.target as Node)) {
+        setOpenedContactKey(null);
+      }
+    };
+
+    document.addEventListener("touchstart", handleOutsideTouch, { passive: true });
+    return () => document.removeEventListener("touchstart", handleOutsideTouch);
+  }, [isTouchDevice, openedContactKey]);
+
+  const handleContactCardPress = (
+    event: React.MouseEvent<HTMLElement>,
+    itemKey: string,
+    hasLink: boolean
+  ) => {
+    if (!isTouchDevice) return;
+
+    if (openedContactKey !== itemKey) {
+      event.preventDefault();
+      setOpenedContactKey(itemKey);
+      return;
+    }
+
+    if (!hasLink) {
+      event.preventDefault();
+      setOpenedContactKey(null);
+      return;
+    }
+
+    setOpenedContactKey(null);
+  };
 
   const handleContactInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -190,41 +251,82 @@ export default function Contact({ language }: { language: Language }) {
             ))}
           </motion.p>
           
-          <div className="flex flex-wrap gap-4 mt-8 relative z-50">
+          <div ref={contactListRef} className="relative z-50 mt-8 flex w-full max-w-[26rem] flex-col gap-3 sm:gap-4">
             {contactDetails.map((link, index) => {
               const Icon = link.icon;
-              
-              const Element = link.href ? motion.a : motion.div;
-              
+
+              const itemKey = `${link.label}-${index}`;
+              const isOpen = isTouchDevice && openedContactKey === itemKey;
+              const hasLink = Boolean(link.href);
+              const cardClassName = `group flex min-h-14 items-center overflow-hidden rounded-full border px-4 py-3 backdrop-blur-md transition-all duration-300 ${
+                isOpen
+                  ? "w-fit max-w-full border-white/40 bg-white/10 shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
+                  : "w-14 border-white/15 bg-white/5 hover:w-fit hover:max-w-full hover:border-white/40 hover:bg-white/10"
+              } ${hasLink ? "cursor-pointer" : "cursor-default"}`;
+
+              if (hasLink) {
+                return (
+                  <motion.a
+                    key={itemKey}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(event) => handleContactCardPress(event, itemKey, true)}
+                    className={cardClassName}
+                  >
+                    <div className={`transition-colors duration-300 ${isOpen ? "text-white" : "text-white/90 group-hover:text-white"}`}>
+                      <Icon size={22} />
+                    </div>
+                    <div
+                      className={`flex min-w-0 flex-col overflow-hidden whitespace-nowrap transition-all duration-300 ${
+                        isOpen
+                          ? "ml-3 max-w-[28rem] opacity-100"
+                          : "ml-0 max-w-0 opacity-0 group-hover:ml-3 group-hover:max-w-[28rem] group-hover:opacity-100"
+                      }`}
+                    >
+                      <span className="mb-1 text-[9px] leading-none uppercase tracking-widest text-white/55">
+                        {link.label}
+                      </span>
+                      <span className="text-xs font-semibold leading-none text-white">
+                        {link.value}
+                      </span>
+                    </div>
+                    <span
+                      className={`ml-auto text-sm text-white/75 transition-all duration-300 ${
+                        isOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                      }`}
+                    >
+                      ↗
+                    </span>
+                  </motion.a>
+                );
+              }
+
               return (
-                <Element
-                  key={index}
-                  href={link.href}
-                  target={link.href ? "_blank" : undefined}
-                  rel={link.href ? "noopener noreferrer" : undefined}
-                  whileHover="hover"
-                  initial="initial"
-                  className="group flex items-center rounded-full border border-white/10 bg-white/5 p-4 transition-colors duration-300 hover:bg-white hover:border-white cursor-none"
+                <button
+                  key={itemKey}
+                  type="button"
+                  onClick={(event) => handleContactCardPress(event, itemKey, false)}
+                  className={cardClassName}
                 >
-                  <div className="text-white group-hover:text-black transition-colors duration-300">
+                  <div className={`transition-colors duration-300 ${isOpen ? "text-white" : "text-white/90 group-hover:text-white"}`}>
                     <Icon size={22} />
                   </div>
-                  <motion.div 
-                    variants={{
-                      initial: { width: 0, opacity: 0, marginLeft: 0 },
-                      hover: { width: "auto", opacity: 1, marginLeft: 12 }
-                    }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="overflow-hidden whitespace-nowrap flex flex-col"
+                  <div
+                    className={`flex min-w-0 flex-col overflow-hidden whitespace-nowrap transition-all duration-300 ${
+                      isOpen
+                        ? "ml-3 max-w-[28rem] opacity-100"
+                        : "ml-0 max-w-0 opacity-0 group-hover:ml-3 group-hover:max-w-[28rem] group-hover:opacity-100"
+                    }`}
                   >
-                    <span className="text-[9px] uppercase tracking-widest text-black/50 leading-none mb-1">
+                    <span className="mb-1 text-[9px] leading-none uppercase tracking-widest text-white/55">
                       {link.label}
                     </span>
-                    <span className="text-xs font-semibold text-black leading-none">
+                    <span className="text-xs font-semibold leading-none text-white">
                       {link.value}
                     </span>
-                  </motion.div>
-                </Element>
+                  </div>
+                </button>
               );
             })}
           </div>
@@ -300,15 +402,15 @@ export default function Contact({ language }: { language: Language }) {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={contactStatus === "sending"}
-                className="mt-6 w-full rounded-full bg-white p-[6px] text-[11px] font-bold uppercase tracking-[0.2em] text-black transition-all flex items-center justify-between relative overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.15)] group cursor-none"
+                className="group relative mt-6 flex w-full items-center justify-between overflow-hidden rounded-full bg-gradient-to-r from-[#00A2E8] via-[#10069F] to-[#E32118] p-[6px] text-[11px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_0_40px_rgba(0,0,0,0.25)] transition-all cursor-none"
               >
                 <div className="pl-6 flex items-center gap-3 relative z-10">
                   <span>{contactStatus === "sending" ? t.submitSending : t.submitBtn}</span>
                 </div>
                 <motion.div 
-                  variants={{ hover: { rotate: -45, scale: 1.05, backgroundColor: "#3b82f6" } }}
+                  variants={{ hover: { rotate: -45, scale: 1.05 } }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white relative z-10"
+                  className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/85 text-white"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -319,7 +421,7 @@ export default function Contact({ language }: { language: Language }) {
                   variants={{ hover: { opacity: 1, scale: 1.5 } }}
                   initial={{ opacity: 0, scale: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="absolute right-6 top-1/2 -translate-y-1/2 h-20 w-20 rounded-full bg-blue-500 blur-2xl z-0"
+                  className="absolute right-6 top-1/2 z-0 h-20 w-20 -translate-y-1/2 rounded-full bg-[#10069F]/70 blur-2xl"
                 />
               </motion.button>
               

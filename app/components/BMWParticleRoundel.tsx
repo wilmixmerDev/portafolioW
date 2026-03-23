@@ -10,11 +10,34 @@ import { useEffect, useRef, useState } from "react";
 export default function BMWParticleRoundel() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isHoveredRef = useRef(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     isHoveredRef.current = hovered;
   }, [hovered]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+
+    const updateTouchMode = () => {
+      const touchMode = mediaQuery.matches;
+      setIsTouchDevice(touchMode);
+      if (!touchMode) {
+        setHovered(false);
+      }
+    };
+
+    updateTouchMode();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateTouchMode);
+      return () => mediaQuery.removeEventListener("change", updateTouchMode);
+    }
+
+    mediaQuery.addListener(updateTouchMode);
+    return () => mediaQuery.removeListener(updateTouchMode);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -144,10 +167,17 @@ export default function BMWParticleRoundel() {
     <div
       className="relative cursor-crosshair"
       style={{ width: 120, height: 120 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onTouchStart={() => setHovered(true)}
-      onTouchEnd={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isTouchDevice) setHovered(true);
+      }}
+      onMouseLeave={() => {
+        if (!isTouchDevice) setHovered(false);
+      }}
+      onTouchStart={(event) => {
+        if (!isTouchDevice) return;
+        event.preventDefault();
+        setHovered((current) => !current);
+      }}
     >
       <canvas
         ref={canvasRef}

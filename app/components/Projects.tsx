@@ -79,22 +79,22 @@ export default function Projects({ language }: { language: Language }) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, margin: "-100px" }}
-          className="flex flex-col items-start gap-4 border-b border-white/10 pb-6 md:flex-row md:items-end md:gap-6 md:pb-8 w-fit mb-12 relative z-20"
+          className="relative z-20 mb-10 flex w-full max-w-full flex-col items-start gap-3 border-b border-white/10 pb-5 sm:mb-12 sm:gap-4 sm:pb-6 md:w-fit md:flex-row md:items-end md:gap-6 md:pb-8"
         >
           <div className="relative">
             {/* Extremely faint M POWER text watermark behind the title */}
-            <div className="absolute -top-10 -left-10 text-[100px] font-headline font-black text-white/[0.02] tracking-widest uppercase pointer-events-none select-none z-0">
+            <div className="pointer-events-none absolute -left-10 -top-10 z-0 hidden select-none text-[100px] font-headline font-black uppercase tracking-widest text-white/[0.02] md:block">
               ///M POWER
             </div>
-            <motion.h2 className="font-headline text-3xl font-bold uppercase tracking-[0.15em] text-white sm:text-4xl md:text-5xl lg:text-6xl text-center md:text-left flex flex-col md:flex-row items-center gap-4 relative z-10">
-              <span className="flex h-6 w-8 hidden md:flex">
+            <motion.h2 className="relative z-10 flex flex-col items-start gap-2 font-headline text-[2.1rem] font-bold uppercase leading-[0.95] tracking-[0.08em] text-white sm:text-4xl sm:tracking-[0.1em] md:flex-row md:items-center md:gap-4 md:text-5xl md:tracking-[0.15em] lg:text-6xl">
+              <span className="mb-1 flex h-5 w-7 md:mb-0 md:h-6 md:w-8">
                 <span className="w-1/3 h-full bg-[#00A2E8] -skew-x-[20deg]" />
                 <span className="w-1/3 h-full bg-[#10069F] -skew-x-[20deg] ml-[-2px]" />
                 <span className="w-1/3 h-full bg-[#E32118] -skew-x-[20deg] ml-[-2px]" />
               </span>
               {t.title}
             </motion.h2>
-            <span className="font-label mt-1 block text-[9px] uppercase tracking-[0.2em] text-white/30 sm:text-[10px] sm:tracking-[0.3em] md:text-[0.6rem] relative z-10">
+            <span className="relative z-10 mt-2 block font-label text-[9px] uppercase tracking-[0.14em] text-white/35 sm:text-[10px] sm:tracking-[0.2em] md:text-[0.6rem] md:tracking-[0.3em]">
               {t.subtitle}
             </span>
           </div>

@@ -85,9 +85,17 @@ export default function Contact({ language }: { language: Language }) {
       setContactStatus("success");
       setContactStatusMessage(data?.message || t.successMsg);
       setContactForm({ email: "", subject: "", message: "" });
+      setTimeout(() => {
+        setContactStatus("idle");
+        setContactStatusMessage("");
+      }, 2000);
     } catch (error) {
       setContactStatus("error");
       setContactStatusMessage(error instanceof Error ? error.message : t.errorMsg);
+      setTimeout(() => {
+        setContactStatus("idle");
+        setContactStatusMessage("");
+      }, 2000);
     }
   };
 

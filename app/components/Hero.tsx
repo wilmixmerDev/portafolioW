@@ -94,36 +94,42 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
-            className="mt-10 grid grid-cols-1 items-end gap-8 sm:mt-12 md:mt-20 md:grid-cols-12 md:gap-12"
+            className="mt-10 grid grid-cols-1 items-center gap-8 sm:mt-12 md:mt-20 md:grid-cols-12 md:gap-12"
           >
-          <motion.div variants={item} className="md:col-span-6 flex items-center pr-4 sm:pr-10 overflow-hidden">
+          <motion.div variants={item} className="md:col-span-8 flex items-center pr-2 sm:pr-8">
             <motion.p 
               variants={{
                 hidden: { opacity: 1 },
-                show: { opacity: 1, transition: { staggerChildren: 0.012, delayChildren: 0.2 } }
+                show: { opacity: 1, transition: { staggerChildren: 0.03, delayChildren: 0.1 } }
               }}
               initial="hidden"
               whileInView="show"
               viewport={{ once: false, amount: 0.2 }}
-              className="text-base font-light leading-relaxed text-white/90 sm:text-lg md:text-2xl drop-shadow-[0_4px_16px_rgba(0,0,0,1)] flex flex-wrap"
+              className="text-base font-light leading-relaxed text-white/90 sm:text-lg md:text-2xl drop-shadow-[0_4px_16px_rgba(0,0,0,1)] text-left"
             >
-              {t.bio.split("").map((char, i) => (
+              {t.bio.split(" ").map((word, wIdx) => (
                 <motion.span
-                  key={i}
+                  key={wIdx}
                   variants={{
-                    hidden: { opacity: 0 },
-                    show: { opacity: 1 }
+                    hidden: { opacity: 0, y: 5 },
+                    show: { opacity: 1, y: 0 }
                   }}
-                  className={char === " " ? "whitespace-pre" : ""}
+                  className="inline-block mr-[0.25em] mb-1"
                 >
-                  {char}
+                  {word}
                 </motion.span>
               ))}
             </motion.p>
           </motion.div>
 
-          <div className="md:col-start-9 md:col-span-4 mt-8 md:mt-0">
-              <div className="flex flex-col gap-5 sm:gap-6">
+          <div className="md:col-start-9 md:col-span-4 mt-8 md:mt-0 flex flex-col justify-end">
+            <div className="glass-panel relative rounded-2xl border border-white/10 p-5 backdrop-blur-md overflow-hidden bg-black/40">
+              <div className="absolute top-0 left-0 w-full h-1 flex">
+                <div className="w-1/3 h-full bg-[#00A2E8]/80" />
+                <div className="w-1/3 h-full bg-[#10069F]/80" />
+                <div className="w-1/3 h-full bg-[#E32118]/80" />
+              </div>
+              <div className="flex flex-col gap-6 pt-2">
                 <div className="flex flex-wrap gap-2">
                   {heroHighlights.map((highlight, index) => (
                     <motion.span
@@ -159,13 +165,13 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
                   ))}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 w-full">
+                <div className="flex flex-col gap-3 mt-2 w-full">
                   <motion.button
                     variants={item}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => scrollToSection("projects")}
-                    className="portfolio-btn group relative overflow-hidden bg-white px-4 py-4 text-[9px] font-bold uppercase tracking-[0.15em] text-black transition-all hover:pr-8 sm:py-5 sm:text-[10px] w-full text-center flex items-center justify-center"
+                    className="portfolio-btn group relative overflow-hidden rounded-xl bg-white px-4 py-4 text-[9px] font-bold uppercase tracking-[0.15em] text-black transition-all hover:pr-8 sm:py-5 sm:text-[10px] w-full text-center flex items-center justify-center"
                   >
                     <span className="relative z-10">{t.showreel}</span>
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 transition-all group-hover:opacity-100">
@@ -178,14 +184,15 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
                     whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.1)" }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => scrollToSection("contact")}
-                    className="portfolio-btn border border-white/20 bg-black/40 px-4 py-4 text-[9px] font-semibold uppercase tracking-[0.15em] text-white transition-colors sm:py-5 sm:text-[10px] w-full text-center backdrop-blur-md flex items-center justify-center"
+                    className="portfolio-btn rounded-xl border border-white/20 bg-black/40 px-4 py-4 text-[9px] font-semibold uppercase tracking-[0.15em] text-white transition-colors sm:py-5 sm:text-[10px] w-full text-center backdrop-blur-md flex items-center justify-center"
                   >
                     {t.quickContact}
                   </motion.button>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
         )}
       </div>
     </section>

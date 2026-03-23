@@ -1,10 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function BackgroundVideo({ isLoaded }: { isLoaded: boolean }) {
   const [videoFailed, setVideoFailed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (isLoaded && videoRef.current) {
+      videoRef.current.play().catch(() => setVideoFailed(true));
+    }
+  }, [isLoaded]);
 
   return (
     <motion.div
@@ -14,7 +21,7 @@ export default function BackgroundVideo({ isLoaded }: { isLoaded: boolean }) {
     >
       <div className="fixed inset-0 z-0 h-screen w-full overflow-hidden">
         <video
-          autoPlay
+          ref={videoRef}
           muted
           loop
           playsInline

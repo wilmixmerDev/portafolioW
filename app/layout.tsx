@@ -13,8 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mi protafolio",
-  description: "Portafolio de Wilmer Iriarte",
+  title: "Wilmer Iriarte | Software Engineer & Full-Stack Developer",
+  description: "Portfolio of Wilmer Iriarte, a Full-Stack Developer specializing in modern web applications, scalable architecture, and premium UI experiences.",
+  keywords: ["Wilmer Iriarte", "Full-Stack Developer", "Software Engineer", "Next.js", "React", "Portfolio"],
+  openGraph: {
+    title: "Wilmer Iriarte | Portfolio",
+    description: "Full-Stack Developer crafting high-performance, beautiful software.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +33,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col selection:bg-white/30 selection:text-white overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }

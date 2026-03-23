@@ -94,7 +94,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
-            className="mt-10 grid grid-cols-1 items-end gap-8 sm:mt-12 md:mt-20 md:grid-cols-12 md:gap-12"
+            className="mt-10 grid grid-cols-1 items-center gap-8 sm:mt-12 md:mt-20 md:grid-cols-12 md:gap-12"
           >
           <motion.div variants={item} className="md:col-span-8 flex items-center pr-2 sm:pr-8">
             <motion.p 
@@ -165,13 +165,13 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
                   ))}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 w-full">
+                <div className="flex flex-col gap-3 mt-2 w-full">
                   <motion.button
                     variants={item}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => scrollToSection("projects")}
-                    className="portfolio-btn group relative overflow-hidden bg-white px-4 py-4 text-[9px] font-bold uppercase tracking-[0.15em] text-black transition-all hover:pr-8 sm:py-5 sm:text-[10px] w-full text-center flex items-center justify-center"
+                    className="portfolio-btn group relative overflow-hidden rounded-xl bg-white px-4 py-4 text-[9px] font-bold uppercase tracking-[0.15em] text-black transition-all hover:pr-8 sm:py-5 sm:text-[10px] w-full text-center flex items-center justify-center"
                   >
                     <span className="relative z-10">{t.showreel}</span>
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 transition-all group-hover:opacity-100">
@@ -184,7 +184,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
                     whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.1)" }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => scrollToSection("contact")}
-                    className="portfolio-btn border border-white/20 bg-black/40 px-4 py-4 text-[9px] font-semibold uppercase tracking-[0.15em] text-white transition-colors sm:py-5 sm:text-[10px] w-full text-center backdrop-blur-md flex items-center justify-center"
+                    className="portfolio-btn rounded-xl border border-white/20 bg-black/40 px-4 py-4 text-[9px] font-semibold uppercase tracking-[0.15em] text-white transition-colors sm:py-5 sm:text-[10px] w-full text-center backdrop-blur-md flex items-center justify-center"
                   >
                     {t.quickContact}
                   </motion.button>

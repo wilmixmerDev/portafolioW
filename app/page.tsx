@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import Stack from "./components/Stack";
+import BMWMarquee from "./components/BMWMarquee";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
@@ -33,16 +34,17 @@ export default function Home() {
       <CustomCursor />
       <NoiseOverlay />
       <ScrollProgress />
-      
+
       <div className="relative min-h-screen bg-black text-[#e2e2e2] flex flex-col">
         <BackgroundVideo isLoaded={isLoaded} />
-        
+
         <Navigation language={language} setLanguage={setLanguage} />
-        
+
         <main className="relative z-20">
           <Hero language={language} isLoaded={isLoaded} />
           <Projects language={language} />
           <Stack language={language} />
+          <BMWMarquee />
           <Contact language={language} />
         </main>
 

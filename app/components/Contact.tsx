@@ -109,7 +109,19 @@ export default function Contact({ language }: { language: Language }) {
   ];
 
   return (
-    <section id="contact" className="mb-12 px-5 py-16 sm:px-6 sm:py-24 md:mb-20 md:px-24 md:py-40">
+    <section id="contact" className="relative mb-12 px-5 py-16 sm:px-6 sm:py-24 md:mb-20 md:px-24 md:py-40 overflow-hidden">
+
+      {/* BMW Roundel — faint watermark bottom-left */}
+      <div className="pointer-events-none absolute -bottom-16 -left-16 translate-y-1/4 -translate-x-1/4 opacity-[0.04] sm:opacity-[0.06]">
+        <svg viewBox="0 0 500 500" className="h-64 w-64 sm:h-80 sm:w-80 md:h-[26rem] md:w-[26rem]">
+          <circle cx="250" cy="250" r="240" stroke="white" strokeWidth="12" fill="none" />
+          <circle cx="250" cy="250" r="155" stroke="white" strokeWidth="12" fill="none" />
+          <circle cx="250" cy="250" r="248" stroke="white" strokeWidth="4" fill="none" />
+          <path d="M 250 95 A 155 155 0 0 1 405 250 L 250 250 Z" fill="white" />
+          <path d="M 250 405 A 155 155 0 0 1 95 250 L 250 250 Z" fill="white" />
+        </svg>
+      </div>
+
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-24">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -117,6 +129,19 @@ export default function Contact({ language }: { language: Language }) {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8 }}
         >
+          {/* M-stripe accent above the title */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+            className="mb-6 flex h-[3px] w-20 origin-left overflow-hidden rounded-full sm:w-28"
+          >
+            <div className="h-full w-1/3 bg-[#00A2E8]" />
+            <div className="h-full w-1/3 bg-[#10069F]" />
+            <div className="h-full w-1/3 bg-[#E32118]" />
+          </motion.div>
+
           <motion.h2 
             variants={{
               hidden: { opacity: 1 },
@@ -214,6 +239,8 @@ export default function Contact({ language }: { language: Language }) {
           <div className="glass-panel relative overflow-hidden rounded-2xl border border-white/15 p-5 backdrop-blur-xl sm:p-7 md:rounded-3xl md:p-12 md:border-white/20">
             <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full blur-3xl transition-all duration-700 bg-white/5" />
             <div className="pointer-events-none absolute -bottom-16 -left-16 h-44 w-44 rounded-full blur-3xl transition-all duration-700 bg-white/5" />
+            {/* BMW blue glow accent — top-right corner */}
+            <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#00A2E8]/10 blur-2xl sm:h-40 sm:w-40 md:h-52 md:w-52" />
 
             <p className="relative z-10 mb-5 text-sm font-medium leading-relaxed text-white/55 sm:mb-6 sm:text-base">
               {t.formIntro}

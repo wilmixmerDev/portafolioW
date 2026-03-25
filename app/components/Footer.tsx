@@ -68,7 +68,26 @@ export default function Footer({ language }: { language: Language }) {
           >
             {t.footer.stack}
           </a>
+          <a
+            className="hidden rounded-full border border-white/30 bg-white/10 px-3 py-1 text-white/85 underline decoration-white/40 underline-offset-4 transition-colors duration-500 hover:text-white md:inline-flex"
+            href="https://youtu.be/YAFUyPp_238?si=pc5es396v5V8uA6c"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t.footer.desktopVideo}
+          </a>
         </div>
+      </div>
+
+      <div className="mx-auto mt-6 flex w-full max-w-7xl justify-center border-t border-white/15 pt-4 sm:mt-8 sm:pt-5 md:hidden">
+        <a
+          href="https://vt.tiktok.com/ZSucb9PU7/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[10px] uppercase tracking-[0.14em] text-white/35 underline decoration-white/25 underline-offset-4 transition-colors duration-500 hover:text-white"
+        >
+          {t.footer.mobileCredits}
+        </a>
       </div>
     </footer>
   );

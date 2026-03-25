@@ -11,12 +11,14 @@ export const translations = {
       adaptability: "Me adapto rápido a nuevas tecnologías y frameworks según las necesidades del proyecto.",
       adaptabilityTitle: "Modo Adaptativo",
     },
-    contact: { title: "TRABAJEMOS JUNTOS EN\nPROYECTOS INCREÍBLES", subtitle: "Estoy abierto a oportunidades de prácticas profesionales, colaboraciones y proyectos desafiantes. Si tienes una idea o un proyecto en mente, me encantaría escucharte y explorar cómo podemos trabajar juntos para llevarla a la realidad.", formIntro: "También puedes enviarme un correo directo desde este formulario.", email: "Correo", phone: "Teléfono", submitBtn: "Enviar", submitSending: "Enviando...", successMsg: "Mensaje enviado correctamente. Te responderé pronto.", errorMsg: "No se pudo enviar el mensaje. Intenta nuevamente.", requiredMsg: "Completa todos los campos antes de enviar.", invalidEmailMsg: "Escribe un correo válido (ejemplo@dominio.com).", formFields: { email: "Tu Correo", subject: "Asunto", message: "Tu Mensaje" }, placeholders: { email: "tu.email@ejemplo.com", subject: "Propuesta de Proyecto", message: "Cuéntame qué tienes en mente..." } },
+    contact: { title: "TRABAJEMOS JUNTOS EN\nPROYECTOS INCREÍBLES", subtitle: "Estoy abierto a oportunidades de prácticas profesionales, colaboraciones y proyectos desafiantes. Si tienes una idea o un proyecto en mente, me encantaría escucharte y explorar cómo podemos trabajar juntos para llevarla a la realidad.", formIntro: "También puedes enviarme un correo directo desde este formulario.", email: "Correo", phone: "Teléfono", submitBtn: "Enviar", submitSending: "Enviando...", successMsg: "¡Gracias por tu mensaje! Lo he recibido y te responderé personalmente en breve Si es urgente también puedes contactarme por WhatsApp o LinkedIn", errorMsg: "Ups algo salió mal al enviar tu mensaje Por favor revisa tu conexión o inténtalo de nuevo en unos minutos Si el problema persiste contáctame directamente por correo o redes sociales", requiredMsg: "Completa todos los campos antes de enviar.", invalidEmailMsg: "Escribe un correo válido (ejemplo@dominio.com).", formFields: { email: "Tu Correo", subject: "Asunto", message: "Tu Mensaje" }, placeholders: { email: "tu.email@ejemplo.com", subject: "Propuesta de Proyecto", message: "Cuéntame qué tienes en mente..." } },
     footer: {
       copyright: "© 2026 WILMER IRIARTE. TODOS LOS DERECHOS RESERVADOS.",
       stack: "Stack",
-      desktopVideo: "Créditos a Damir Who",
-      mobileCredits: "Créditos video",
+      desktopVideo: "Créditos a sl0wguy (TikTok)",
+      mobileCredits: "Créditos a sl0wguy (TikTok)",
+      mobileCreditsUrl: "https://www.tiktok.com/@sl0wguy",
+      desktopVideoUrl: "https://www.tiktok.com/@sl0wguy",
     },
   },
   en: {
@@ -29,12 +31,14 @@ export const translations = {
       adaptability: "I quickly adapt to new technologies and frameworks based on project needs.",
       adaptabilityTitle: "Adaptive Mode",
     },
-    contact: { title: "LET'S COLLABORATE ON\nAMAZING PROJECTS", subtitle: "I'm open to internships, collaborations, and exciting projects. If you have an idea or project in mind, I'd love to hear about it and explore how we can work together to bring it to life.", formIntro: "You can also send me a direct email through this form.", email: "Email", phone: "Phone", submitBtn: "Send", submitSending: "Sending...", successMsg: "Message sent successfully. I'll get back to you soon.", errorMsg: "Could not send the message. Please try again.", requiredMsg: "Please complete all fields before sending.", invalidEmailMsg: "Please enter a valid email (example@domain.com).", formFields: { email: "Your Email", subject: "Subject", message: "Your Message" }, placeholders: { email: "your.email@example.com", subject: "Project Proposal", message: "Tell me what you have in mind..." } },
+    contact: { title: "LET'S COLLABORATE ON\nAMAZING PROJECTS", subtitle: "I'm open to internships, collaborations, and exciting projects. If you have an idea or project in mind, I'd love to hear about it and explore how we can work together to bring it to life.", formIntro: "You can also send me a direct email through this form.", email: "Email", phone: "Phone", submitBtn: "Send", submitSending: "Sending...", successMsg: "Thank you for your message I have received it and will reply to you personally soon If it's urgent you can also reach me on WhatsApp or LinkedIn", errorMsg: "Oops something went wrong while sending your message Please check your connection or try again in a few minutes If the problem persists contact me directly by email or social media", requiredMsg: "Please complete all fields before sending.", invalidEmailMsg: "Please enter a valid email (example@domain.com).", formFields: { email: "Your Email", subject: "Subject", message: "Your Message" }, placeholders: { email: "your.email@example.com", subject: "Project Proposal", message: "Tell me what you have in mind..." } },
     footer: {
       copyright: "© 2026 WILMER IRIARTE. ALL RIGHTS RESERVED.",
       stack: "Stack",
-      desktopVideo: "Credits to Damir Who",
-      mobileCredits: "Video credits",
+      desktopVideo: "Credits to sl0wguy (TikTok)",
+      mobileCredits: "Credits to sl0wguy (TikTok)",
+      mobileCreditsUrl: "https://www.tiktok.com/@sl0wguy",
+      desktopVideoUrl: "https://www.tiktok.com/@sl0wguy",
     },
   }
 };

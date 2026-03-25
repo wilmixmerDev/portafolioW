@@ -150,7 +150,7 @@ export default function Contact({ language }: { language: Language }) {
       }
 
       setContactStatus("success");
-      setContactStatusMessage(data?.message || t.successMsg);
+      setContactStatusMessage(t.successMsg);
       setContactForm({ email: "", subject: "", message: "" });
       setTimeout(() => {
         setContactStatus("idle");
@@ -260,7 +260,8 @@ export default function Contact({ language }: { language: Language }) {
           transition={{ duration: 0.8 }}
           className="flex flex-col"
         >
-          {/* M-stripe accent above the title */}
+
+          {/* M-stripe accent above the title (restaurado) */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -273,6 +274,7 @@ export default function Contact({ language }: { language: Language }) {
             <div className="h-full w-1/3 bg-[#E32118]" />
           </motion.div>
 
+          {/* Título principal */}
           <motion.h2
             variants={{
               hidden: { opacity: 1 },
@@ -296,6 +298,10 @@ export default function Contact({ language }: { language: Language }) {
               </motion.span>
             ))}
           </motion.h2>
+
+
+
+
 
           <div className="relative z-50 order-1 mt-2 flex w-full max-w-104 flex-col gap-3 md:hidden">
             {contactDetails.map((link, index) => {

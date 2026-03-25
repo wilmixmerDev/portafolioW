@@ -8,8 +8,9 @@ export default function Footer({ language }: { language: Language }) {
   const t = translations[language];
 
   return (
-    <footer className="relative z-20 w-full overflow-hidden border-t border-white/5 bg-black/40 px-5 py-8 backdrop-blur-md sm:px-6 sm:py-10 md:px-10 md:py-16">
-
+    <footer
+      className="relative z-20 w-full overflow-hidden border-t border-white/5 bg-black/40 px-3 py-6 mt-12 sm:px-4 sm:py-8 sm:mt-14 md:px-10 md:py-16 md:mt-0 mt-auto"
+    >
       {/* BMW tricolor stripe at top of footer */}
       <div className="absolute left-0 top-0 flex h-[2px] w-full">
         <div className="h-full w-1/3 bg-[#00A2E8]/70" />
@@ -17,8 +18,7 @@ export default function Footer({ language }: { language: Language }) {
         <div className="h-full w-1/3 bg-[#E32118]/70" />
       </div>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 md:flex-row md:gap-0">
-
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 md:flex-row md:gap-0">
         {/* Left: copyright */}
         <div className="text-[9px] uppercase tracking-[0.14em] text-white/20 sm:text-[10px] sm:tracking-[0.2em] md:text-[0.6rem] md:tracking-[0.3em]">
           {t.footer.copyright}
@@ -70,7 +70,7 @@ export default function Footer({ language }: { language: Language }) {
           </a>
           <a
             className="hidden rounded-full border border-white/30 bg-white/10 px-3 py-1 text-white/85 underline decoration-white/40 underline-offset-4 transition-colors duration-500 hover:text-white md:inline-flex"
-            href="https://youtu.be/YAFUyPp_238?si=pc5es396v5V8uA6c"
+            href={t.footer.desktopVideoUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -79,12 +79,12 @@ export default function Footer({ language }: { language: Language }) {
         </div>
       </div>
 
-      <div className="mx-auto mt-6 flex w-full max-w-7xl justify-center border-t border-white/15 pt-4 sm:mt-8 sm:pt-5 md:hidden">
+      <div className="mx-auto mt-4 flex w-full max-w-7xl justify-center md:hidden">
         <a
-          href="https://vt.tiktok.com/ZSucb9PU7/"
+          href={t.footer.mobileCreditsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[10px] uppercase tracking-[0.14em] text-white/35 underline decoration-white/25 underline-offset-4 transition-colors duration-500 hover:text-white"
+          className="block rounded-full bg-white/10 px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-white/80 underline decoration-white/30 underline-offset-4 shadow-sm transition-colors duration-500 hover:text-white hover:bg-white/20"
         >
           {t.footer.mobileCredits}
         </a>

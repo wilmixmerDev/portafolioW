@@ -70,11 +70,11 @@ export default function Footer({ language }: { language: Language }) {
           </a>
           <a
             className="hidden rounded-full border border-white/30 bg-white/10 px-3 py-1 text-white/85 underline decoration-white/40 underline-offset-4 transition-colors duration-500 hover:text-white md:inline-flex"
-            href={t.footer.desktopVideoUrl}
+            href="https://youtu.be/YAFUyPp_238?si=FKewTWOqaZ5F2nAP"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t.footer.desktopVideo}
+            Credits: Damir Who
           </a>
         </div>
       </div>

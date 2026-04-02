@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { translations, Language } from "../i18n/translations";
 import { Mail, Phone, Github, Linkedin, Copy, Check } from "lucide-react";
+import { translations, Language } from "../i18n/translations";
 
 const DiscordIcon = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -21,10 +21,11 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function Contact({ language }: { language: Language }) {
   const t = translations[language].contact;
+
   const [copiedContactKey, setCopiedContactKey] = useState<string | null>(null);
+  const [copyToastMessage, setCopyToastMessage] = useState<string | null>(null);
   const copyResetTimeoutRef = useRef<number | null>(null);
   const toastResetTimeoutRef = useRef<number | null>(null);
-  const [copyToastMessage, setCopyToastMessage] = useState<string | null>(null);
 
   const [contactForm, setContactForm] = useState<ContactFormData>({
     email: "",
@@ -47,7 +48,7 @@ export default function Contact({ language }: { language: Language }) {
 
   const showCopyToast = (label: string) => {
     const copiedText = language === "es" ? "copiado correctamente" : "copied successfully";
-    setCopyToastMessage(`${label} • ${copiedText}`);
+    setCopyToastMessage(`${label} - ${copiedText}`);
 
     if (toastResetTimeoutRef.current) {
       window.clearTimeout(toastResetTimeoutRef.current);
@@ -97,9 +98,7 @@ export default function Contact({ language }: { language: Language }) {
     }, 1400);
   };
 
-  const handleContactInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleContactInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setContactForm((current) => ({
       ...current,
@@ -170,14 +169,21 @@ export default function Contact({ language }: { language: Language }) {
     { icon: Mail, label: t.email, value: "wilmixmer@gmail.com", href: "mailto:wilmixmer@gmail.com", copyOnClick: true },
     { icon: Phone, label: t.phone, value: "+57 302 244 7855", href: "tel:+573022447855", copyOnClick: true },
     { icon: DiscordIcon, label: "Discord", value: "wilmixmer", href: "https://discordapp.com/users/wilmixmer" },
-    { icon: Linkedin, label: "LinkedIn", value: "@wilmer-andres-iriarte-camargo", href: "https://www.linkedin.com/in/wilmer-andres-iriarte-camargo-629372291" },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "@wilmer-andres-iriarte-camargo",
+      href: "https://www.linkedin.com/in/wilmer-andres-iriarte-camargo-629372291",
+    },
     { icon: Github, label: "GitHub Main", value: "@wilmixmerDev", href: "https://github.com/wilmixmerDev" },
     { icon: Github, label: "GitHub Sec.", value: "@wilmixmer", href: "https://github.com/wilmixmer" },
   ];
 
   return (
-    <section id="contact" className="relative mb-8 px-5 py-8 sm:px-6 sm:py-16 md:mb-20 md:px-24 md:py-40">
-
+    <section
+      id="contact"
+      className="relative mb-8 px-4 py-8 sm:px-6 sm:py-16 md:mb-20 md:px-24 md:py-40"
+    >
       <AnimatePresence>
         {copyToastMessage && (
           <motion.div
@@ -202,7 +208,6 @@ export default function Contact({ language }: { language: Language }) {
           {contactDetails.map((link, index) => {
             const Icon = link.icon;
             const href = link.href ?? "#contact";
-            // Solo para los dos GitHub, mostrar insignia visual
             const isGithub = link.label === "GitHub Main" || link.label === "GitHub Sec.";
             const badgeText = link.label === "GitHub Main" ? "Main" : link.label === "GitHub Sec." ? "Sec" : null;
 
@@ -231,7 +236,7 @@ export default function Contact({ language }: { language: Language }) {
               >
                 <Icon size={18} />
                 {isGithub && (
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-2 py-px text-[9px] font-bold text-[#10069F] shadow-sm border border-white/60 select-none pointer-events-none">
+                  <span className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 select-none rounded-full border border-white/60 bg-white/90 px-2 py-px text-[9px] font-bold text-[#10069F] shadow-sm">
                     {badgeText}
                   </span>
                 )}
@@ -241,7 +246,6 @@ export default function Contact({ language }: { language: Language }) {
         </div>
       </div>
 
-      {/* BMW Roundel — faint watermark bottom-left */}
       <div className="pointer-events-none absolute -bottom-16 -left-16 translate-y-1/4 -translate-x-1/4 opacity-[0.04] sm:opacity-[0.06]">
         <svg viewBox="0 0 500 500" className="h-64 w-64 sm:h-80 sm:w-80 md:h-104 md:w-104">
           <circle cx="250" cy="250" r="240" stroke="white" strokeWidth="12" fill="none" />
@@ -252,7 +256,7 @@ export default function Contact({ language }: { language: Language }) {
         </svg>
       </div>
 
-      <div className="mx-auto grid w-full max-w-full grid-cols-1 items-start gap-6 sm:gap-10 lg:grid-cols-2 lg:gap-24">
+      <div className="mx-auto grid w-full max-w-full grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-24">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -260,169 +264,96 @@ export default function Contact({ language }: { language: Language }) {
           transition={{ duration: 0.8 }}
           className="flex flex-col"
         >
+          <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:gap-4 lg:hidden">
+            {contactDetails.map((item, index) => {
+              const Icon = item.icon;
+              const itemKey = `${item.label}-${item.value}`;
+              const wasCopied = copiedContactKey === itemKey;
 
-          {/* M-stripe accent above the title (restaurado) */}
+              return (
+                <motion.a
+                  key={`${itemKey}-${index}`}
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ delay: 0.05 * index, duration: 0.35, ease: "easeOut" }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.995 }}
+                  className="group relative flex items-center gap-3 overflow-hidden rounded-full border border-white/25 bg-black/35 px-4 py-3 text-white/95 backdrop-blur-md transition-all duration-300 hover:border-white/45 hover:bg-white/10 sm:gap-4 sm:px-6 sm:py-4"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/95 sm:h-11 sm:w-11">
+                    <Icon size={20} />
+                  </span>
+
+                  <span className="min-w-0 flex-1 leading-tight">
+                    <span className="block text-[10px] uppercase tracking-[0.18em] text-white/45 sm:text-[11px]">
+                      {item.label}
+                    </span>
+                    <span className="block truncate text-base font-semibold text-white sm:text-[1.72rem] md:text-lg">
+                      {item.value}
+                    </span>
+                  </span>
+
+                  <div className="ml-2 flex items-center gap-2 sm:gap-3">
+                    {item.copyOnClick && (
+                      <button
+                        type="button"
+                        onClick={(event) => handleCopyContactValue(event, itemKey, item.value, item.label)}
+                        aria-label={`Copy ${item.label}`}
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white/85 transition-all duration-300 hover:border-white/45 hover:bg-white/10 hover:text-white"
+                      >
+                        {wasCopied ? <Check size={14} /> : <Copy size={14} />}
+                      </button>
+                    )}
+                    <span className="text-lg leading-none text-white/65 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-white/95">
+                      &rarr;
+                    </span>
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-            className="mb-6 flex h-0.75 w-20 origin-left overflow-hidden rounded-full sm:w-28"
+            className="mb-4 flex h-0.75 w-20 origin-left overflow-hidden rounded-full sm:mb-6 sm:w-28"
           >
             <div className="h-full w-1/3 bg-[#00A2E8]" />
             <div className="h-full w-1/3 bg-[#10069F]" />
             <div className="h-full w-1/3 bg-[#E32118]" />
           </motion.div>
 
-          {/* Título principal */}
           <motion.h2
             variants={{
               hidden: { opacity: 1 },
-              show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+              show: { opacity: 1, transition: { staggerChildren: 0.1 } },
             }}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
-            className="font-headline order-2 mb-3 mt-4 text-3xl font-bold leading-[0.95] tracking-tight text-white sm:mb-6 sm:mt-8 sm:text-4xl md:mb-14 md:mt-0 md:text-5xl lg:text-6xl xl:text-7xl"
+            className="font-headline mb-4 text-3xl font-bold leading-[0.95] tracking-tight text-white sm:mb-6 sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl xl:text-7xl"
           >
             {t.title.split(" ").map((word, i) => (
               <motion.span
                 key={i}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
-                  show: { opacity: 1, y: 0 }
+                  show: { opacity: 1, y: 0 },
                 }}
-                className="inline-block mr-[0.2em]"
+                className="mr-[0.2em] inline-block"
               >
                 {word}
               </motion.span>
             ))}
           </motion.h2>
 
-
-
-
-
-          <div className="relative z-50 order-1 mt-2 flex w-full max-w-104 flex-col gap-3 md:hidden">
-            {contactDetails.map((link, index) => {
-              const Icon = link.icon;
-
-              const itemKey = `${link.label}-${index}`;
-              const hasLink = Boolean(link.href);
-              const copyTarget = hasLink ? link.href ?? "" : link.value;
-              const wasCopied = copiedContactKey === itemKey;
-              const cardClassName = `flex min-h-14 w-full items-center overflow-hidden rounded-full border border-white/40 bg-white/12 px-4 py-3 backdrop-blur-md transition-all duration-300 md:border-white/30 md:bg-white/10 md:hover:border-white/45 md:hover:bg-white/15 ${hasLink ? "cursor-pointer" : "cursor-default"}`;
-
-              if (hasLink) {
-                return (
-                  <div key={itemKey} className="group flex w-full flex-col gap-2 md:flex-row md:items-center">
-                    <motion.a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={
-                        link.copyOnClick
-                          ? async (event) => {
-                              event.preventDefault();
-                              await copyTextToClipboard(link.value);
-                              showCopyToast(link.label);
-                            }
-                          : undefined
-                      }
-                      className={cardClassName}
-                    >
-                      <div className="text-white transition-colors duration-300">
-                        <Icon size={22} />
-                      </div>
-                      <div className="ml-3 flex min-w-0 flex-col overflow-hidden whitespace-nowrap">
-                        <span className="mb-1 text-[9px] leading-none uppercase tracking-widest text-white/55">
-                          {link.label}
-                        </span>
-                        <span className="text-xs font-semibold leading-none text-white">
-                          {link.value}
-                        </span>
-                      </div>
-                      <span className="ml-auto text-sm text-white/75">↗</span>
-                    </motion.a>
-
-                    <button
-                      type="button"
-                      onClick={(event) => handleCopyContactValue(event, itemKey, copyTarget, link.label)}
-                      className="hidden h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/5 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-white/45 hover:bg-white/10 hover:text-white md:flex"
-                      aria-label={wasCopied ? "Copiado" : "Copiar"}
-                    >
-                      {wasCopied ? <Check size={14} /> : <Copy size={14} />}
-                    </button>
-
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hidden h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/5 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-white/45 hover:bg-white/10 hover:text-white md:flex"
-                      aria-label="Ir al enlace"
-                    >
-                      ↗
-                    </a>
-                  </div>
-                );
-              }
-
-              return (
-                <div key={itemKey} className="group flex w-full flex-col gap-2 md:flex-row md:items-center">
-                  <button
-                    type="button"
-                    className={cardClassName}
-                  >
-                    <div className="text-white transition-colors duration-300">
-                      <Icon size={22} />
-                    </div>
-                    <div className="ml-3 flex min-w-0 flex-col overflow-hidden whitespace-nowrap">
-                      <span className="mb-1 text-[9px] leading-none uppercase tracking-widest text-white/55">
-                        {link.label}
-                      </span>
-                      <span className="text-xs font-semibold leading-none text-white">
-                        {link.value}
-                      </span>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={(event) => handleCopyContactValue(event, itemKey, copyTarget, link.label)}
-                    className="hidden h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/5 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-white/45 hover:bg-white/10 hover:text-white md:flex"
-                    aria-label={wasCopied ? "Copiado" : "Copiar"}
-                  >
-                    {wasCopied ? <Check size={14} /> : <Copy size={14} />}
-                  </button>
-                </div>
-              );
-            })}
-
-          </div>
-
-          <motion.p
-            variants={{
-              hidden: { opacity: 1 },
-              show: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.3 } }
-            }}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-            className="order-3 mt-4 hidden max-w-lg text-base font-light leading-relaxed text-white/50 sm:mb-8 sm:mt-6 sm:block sm:text-lg md:mb-14 md:text-xl"
-          >
-            {t.subtitle.split(" ").map((word, i) => (
-              <motion.span
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  show: { opacity: 1, y: 0 }
-                }}
-                className="inline-block mr-[0.25em]"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.p>
+          <p className="max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base lg:text-lg xl:text-xl">{t.subtitle}</p>
         </motion.div>
 
         <motion.div
@@ -432,19 +363,18 @@ export default function Contact({ language }: { language: Language }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-2 sm:mt-4 md:mt-0"
         >
-          <div className="glass-panel relative overflow-hidden rounded-2xl border border-white/15 p-5 backdrop-blur-xl sm:p-7 md:rounded-3xl md:p-12 md:border-white/20">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full blur-3xl transition-all duration-700 bg-white/5" />
-            <div className="pointer-events-none absolute -bottom-16 -left-16 h-44 w-44 rounded-full blur-3xl transition-all duration-700 bg-white/5" />
-            {/* BMW blue glow accent — top-right corner */}
+          <div className="glass-panel relative overflow-hidden rounded-2xl border border-white/15 p-5 backdrop-blur-xl sm:p-7 md:rounded-3xl md:border-white/20 md:p-12">
+            <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-white/5 blur-3xl transition-all duration-700" />
+            <div className="pointer-events-none absolute -bottom-16 -left-16 h-44 w-44 rounded-full bg-white/5 blur-3xl transition-all duration-700" />
             <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#00A2E8]/10 blur-2xl sm:h-40 sm:w-40 md:h-52 md:w-52" />
 
             <p className="relative z-10 mb-5 text-sm font-medium leading-relaxed text-white/55 sm:mb-6 sm:text-base">
               {t.formIntro}
             </p>
 
-            <form onSubmit={handleContactSubmit} className="relative z-10 flex flex-col gap-6 mt-8">
+            <form onSubmit={handleContactSubmit} className="relative z-10 mt-8 flex flex-col gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-white/50 px-1">
+                <label className="px-1 text-[10px] font-bold uppercase tracking-widest text-white/50">
                   {t.formFields.email}
                 </label>
                 <input
@@ -455,12 +385,12 @@ export default function Contact({ language }: { language: Language }) {
                   placeholder={t.placeholders.email}
                   required
                   disabled={contactStatus === "sending"}
-                  className="w-full rounded-2xl border border-white/5 bg-white/5 p-5 text-sm font-light text-white outline-none transition-all duration-300 focus:border-white/30 focus:bg-white/10 focus:ring-4 focus:ring-white/5 placeholder:text-white/20"
+                  className="w-full rounded-2xl border border-white/5 bg-white/5 p-5 text-sm font-light text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-white/30 focus:bg-white/10 focus:ring-4 focus:ring-white/5"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-white/50 px-1">
+                <label className="px-1 text-[10px] font-bold uppercase tracking-widest text-white/50">
                   {t.formFields.subject}
                 </label>
                 <input
@@ -471,12 +401,12 @@ export default function Contact({ language }: { language: Language }) {
                   placeholder={t.placeholders.subject}
                   required
                   disabled={contactStatus === "sending"}
-                  className="w-full rounded-2xl border border-white/5 bg-white/5 p-5 text-sm font-light text-white outline-none transition-all duration-300 focus:border-white/30 focus:bg-white/10 focus:ring-4 focus:ring-white/5 placeholder:text-white/20"
+                  className="w-full rounded-2xl border border-white/5 bg-white/5 p-5 text-sm font-light text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-white/30 focus:bg-white/10 focus:ring-4 focus:ring-white/5"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-white/50 px-1">
+                <label className="px-1 text-[10px] font-bold uppercase tracking-widest text-white/50">
                   {t.formFields.message}
                 </label>
                 <textarea
@@ -487,7 +417,7 @@ export default function Contact({ language }: { language: Language }) {
                   placeholder={t.placeholders.message}
                   required
                   disabled={contactStatus === "sending"}
-                  className="w-full resize-none rounded-2xl border border-white/5 bg-white/5 p-5 text-sm font-light text-white outline-none transition-all duration-300 focus:border-white/30 focus:bg-white/10 focus:ring-4 focus:ring-white/5 placeholder:text-white/20"
+                  className="w-full resize-none rounded-2xl border border-white/5 bg-white/5 p-5 text-sm font-light text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-white/30 focus:bg-white/10 focus:ring-4 focus:ring-white/5"
                 ></textarea>
               </div>
 
@@ -496,29 +426,40 @@ export default function Contact({ language }: { language: Language }) {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={contactStatus === "sending"}
-                className="group relative mt-6 flex w-full items-center justify-between overflow-hidden rounded-full bg-linear-to-r from-[#00A2E8] via-[#10069F] to-[#E32118] p-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_0_40px_rgba(0,0,0,0.25)] transition-all cursor-none"
+                className="group relative mt-6 flex w-full cursor-none items-center justify-between overflow-hidden rounded-full bg-linear-to-r from-[#00A2E8] via-[#10069F] to-[#E32118] p-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_0_40px_rgba(0,0,0,0.25)] transition-all"
               >
-                <div className="pl-6 flex items-center gap-3 relative z-10">
+                <div className="relative z-10 flex items-center gap-3 pl-6">
                   <span>{contactStatus === "sending" ? t.submitSending : t.submitBtn}</span>
                 </div>
-                <motion.div 
+
+                <motion.div
                   variants={{ hover: { rotate: -45, scale: 1.05 } }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/85 text-white"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
                 </motion.div>
-                <motion.div 
+
+                <motion.div
                   variants={{ hover: { opacity: 1, scale: 1.5 } }}
                   initial={{ opacity: 0, scale: 0 }}
                   transition={{ duration: 0.4 }}
                   className="absolute right-6 top-1/2 z-0 h-20 w-20 -translate-y-1/2 rounded-full bg-[#10069F]/70 blur-2xl"
                 />
               </motion.button>
-              
+
               {contactStatusMessage && (
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}

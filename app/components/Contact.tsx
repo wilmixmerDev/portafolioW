@@ -368,9 +368,54 @@ export default function Contact({ language }: { language: Language }) {
             <div className="pointer-events-none absolute -bottom-16 -left-16 h-44 w-44 rounded-full bg-white/5 blur-3xl transition-all duration-700" />
             <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#00A2E8]/10 blur-2xl sm:h-40 sm:w-40 md:h-52 md:w-52" />
 
-            <p className="relative z-10 mb-5 text-sm font-medium leading-relaxed text-white/55 sm:mb-6 sm:text-base">
-              {t.formIntro}
-            </p>
+            <div className="relative z-10 mb-8 sm:mb-10">
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.6 }}
+                className="group relative rounded-xl border border-white/10 bg-gradient-to-r from-white/5 to-white/[0.02] p-5 sm:p-6 transition-all duration-500 hover:border-white/20 hover:bg-white/8 flex items-start gap-4 sm:gap-5 overflow-hidden"
+              >
+                {/* Top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-1 flex gap-0">
+                  <div className="flex-1 bg-gradient-to-r from-[#00A2E8] via-[#10069F] to-[#E32118]" />
+                </div>
+
+                {/* BMW color stripe */}
+                <motion.div
+                  whileHover={{ scaleY: 1.05 }}
+                  className="relative flex w-1.5 h-12 shrink-0 gap-0 rounded-full overflow-hidden mt-0.5 sm:h-14"
+                >
+                  <motion.div 
+                    animate={{ opacity: [0.8, 1, 0.8] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="flex-1 bg-[#00A2E8]" 
+                  />
+                  <motion.div 
+                    animate={{ opacity: [0.8, 1, 0.8] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                    className="flex-1 bg-[#10069F]" 
+                  />
+                  <motion.div 
+                    animate={{ opacity: [0.8, 1, 0.8] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+                    className="flex-1 bg-[#E32118]" 
+                  />
+                </motion.div>
+
+                {/* Text */}
+                <div className="flex-1 pt-1">
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-sm font-medium leading-relaxed text-white/90 sm:text-base group-hover:text-white transition-colors"
+                  >
+                    {t.formIntro}
+                  </motion.p>
+                </div>
+              </motion.div>
+            </div>
 
             <form onSubmit={handleContactSubmit} className="relative z-10 mt-8 flex flex-col gap-6">
               <div className="flex flex-col gap-2">

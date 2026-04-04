@@ -43,7 +43,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
   };
 
   return (
-    <section id="about" className="flex min-h-screen flex-col px-5 pb-10 pt-28 sm:px-6 sm:pt-32 md:px-24 md:pt-48">
+    <section key={language} id="about" className="flex min-h-screen flex-col px-5 pb-10 pt-28 sm:px-6 sm:pt-32 md:px-24 md:pt-48">
       <div className="mx-auto w-full max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
               {t.title[1]}
             </motion.span>
           </div>
-          <div className="overflow-hidden pb-8 w-full h-full relative">
+          <div className="relative -mt-2 w-full h-full pb-2 sm:-mt-3 sm:pb-3">
             <motion.div
               initial={{ opacity: 0 }}
               animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
@@ -90,11 +90,12 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
 
         {isLoaded && (
           <motion.div
+            key={`hero-content-${language}`}
             variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
-            className="mt-10 grid grid-cols-1 items-center gap-8 sm:mt-12 md:mt-20 md:grid-cols-12 md:gap-12"
+            className="mt-14 grid grid-cols-1 items-center gap-8 sm:mt-18 md:mt-24 md:grid-cols-12 md:gap-12"
           >
           <motion.div variants={item} className="md:col-span-8 flex items-center pr-2 sm:pr-8">
             <motion.p 
@@ -122,7 +123,10 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
             </motion.p>
           </motion.div>
 
-          <div className="md:col-start-9 md:col-span-4 mt-8 md:mt-0 flex flex-col justify-end">
+          <motion.div
+            variants={item}
+            className="mt-12 flex flex-col justify-end md:col-start-9 md:col-span-4 md:mt-6"
+          >
             <div className="glass-panel relative rounded-2xl border border-white/10 p-5 backdrop-blur-md overflow-hidden bg-black/40">
               <div className="absolute top-0 left-0 w-full h-1 flex">
                 <div className="w-1/3 h-full bg-[#00A2E8]/80" />
@@ -131,7 +135,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
               </div>
               <div className="flex flex-col gap-6 pt-2">
                 <div className="flex flex-wrap gap-2">
-                  {heroHighlights.map((highlight, index) => (
+                  {heroHighlights.map((highlight) => (
                     <motion.span
                       key={highlight}
                       variants={item}
@@ -147,7 +151,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
                 </motion.div>
 
                 <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  {heroStats.map((stat, index) => (
+                  {heroStats.map((stat) => (
                     <motion.div
                       key={stat.label}
                       variants={item}
@@ -158,7 +162,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
                       <div className="font-headline text-lg font-semibold text-white sm:text-xl drop-shadow-md">
                         {stat.value}
                       </div>
-                      <div className="text-[7px] uppercase tracking-[0.1em] text-white/60 sm:text-[8px] mt-1 text-center w-full leading-tight">
+                      <div className="mt-1 w-full text-center text-[7px] uppercase tracking-widest text-white/60 leading-tight sm:text-[8px]">
                         {stat.label}
                       </div>
                     </motion.div>
@@ -191,7 +195,7 @@ export default function Hero({ language, isLoaded }: { language: Language; isLoa
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
         )}
       </div>

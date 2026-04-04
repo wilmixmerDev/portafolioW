@@ -218,7 +218,7 @@ export default function ParticleText({ text }: { text: string }) {
   return (
     <div
       ref={containerRef}
-      className="w-full relative cursor-crosshair h-[12vw] sm:h-[10vw] md:h-[150px] scale-105"
+      className="relative h-[24vw] w-[110%] -translate-x-[5%] cursor-crosshair scale-105 sm:h-[10vw] sm:w-full sm:translate-x-0 md:h-37.5"
       onMouseEnter={() => {
         if (!isTouchDevice) setIsHovered(true);
       }}
@@ -233,7 +233,7 @@ export default function ParticleText({ text }: { text: string }) {
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-contain block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-contain mask-[radial-gradient(ellipse_at_center,black_62%,transparent_100%)]"
       />
     </div>
   );

@@ -35,7 +35,7 @@ export default function Home() {
       <NoiseOverlay />
       <ScrollProgress />
 
-      <div className="relative min-h-screen bg-black text-[#e2e2e2] flex flex-col">
+      <div className="relative flex min-h-dvh flex-col bg-black text-[#e2e2e2]">
         <BackgroundVideo isLoaded={isLoaded} />
 
         <Navigation language={language} setLanguage={setLanguage} />

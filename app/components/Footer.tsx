@@ -9,10 +9,11 @@ export default function Footer({ language }: { language: Language }) {
 
   return (
     <footer
-      className="relative z-20 w-full overflow-hidden border-t border-white/5 bg-black/40 px-3 py-6 mt-12 sm:px-4 sm:py-8 sm:mt-14 md:px-10 md:py-16 md:mt-0 mt-auto"
+      key={language}
+      className="relative z-20 mt-auto w-full overflow-hidden border-t border-white/5 bg-black/40 px-3 py-6 sm:px-4 sm:py-8 md:px-10 md:py-16"
     >
       {/* BMW tricolor stripe at top of footer */}
-      <div className="absolute left-0 top-0 flex h-[2px] w-full">
+      <div className="absolute left-0 top-0 flex h-0.5 w-full">
         <div className="h-full w-1/3 bg-[#00A2E8]/70" />
         <div className="h-full w-1/3 bg-[#10069F]/70" />
         <div className="h-full w-1/3 bg-[#E32118]/70" />
@@ -30,7 +31,7 @@ export default function Footer({ language }: { language: Language }) {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-first md:order-none"
+          className="order-first md:order-0"
         >
           <svg
             viewBox="0 0 100 100"

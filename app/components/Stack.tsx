@@ -25,11 +25,11 @@ export default function Stack({ language }: { language: Language }) {
       : ["Fast learning", "Low-friction changes", "Continuous integration", "Results-oriented"];
 
   return (
-    <section id="stack" className="relative overflow-hidden px-5 py-20 sm:px-6 sm:py-24 md:px-24 md:py-40">
+    <section key={language} id="stack" className="relative overflow-hidden px-5 py-20 sm:px-6 sm:py-24 md:px-24 md:py-40">
 
       {/* BMW Roundel — faint watermark top-right */}
       <div className="pointer-events-none absolute right-0 top-0 -translate-y-1/4 translate-x-1/4 opacity-[0.04] sm:opacity-[0.06]">
-        <svg viewBox="0 0 500 500" className="h-64 w-64 sm:h-96 sm:w-96 md:h-[30rem] md:w-[30rem]">
+        <svg viewBox="0 0 500 500" className="h-64 w-64 sm:h-96 sm:w-96 md:h-120 md:w-120">
           <circle cx="250" cy="250" r="240" stroke="white" strokeWidth="12" fill="none" />
           <circle cx="250" cy="250" r="155" stroke="white" strokeWidth="12" fill="none" />
           <circle cx="250" cy="250" r="248" stroke="white" strokeWidth="4" fill="none" />
@@ -56,7 +56,7 @@ export default function Stack({ language }: { language: Language }) {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-            className="mx-auto mb-6 flex h-[3px] w-24 origin-left overflow-hidden rounded-full sm:w-32"
+            className="mx-auto mb-6 flex h-0.75 w-24 origin-left overflow-hidden rounded-full sm:w-32"
           >
             <div className="h-full w-1/3 bg-[#00A2E8]" />
             <div className="h-full w-1/3 bg-[#10069F]" />

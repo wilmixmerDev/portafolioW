@@ -229,12 +229,20 @@ export default function Contact({ language }: { language: Language }) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 * index, duration: 0.35, ease: "easeOut" }}
-                whileHover={{ scale: 1.07, x: -4 }}
+                whileHover={{
+                  x: -5,
+                  transition: { type: "tween", duration: 0.14, ease: "easeOut" },
+                }}
                 whileTap={{ scale: 0.96 }}
-                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/45 text-white/90 backdrop-blur-md transition-all duration-300 hover:border-white/60 hover:bg-white/15 hover:text-white"
+                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/45 text-white/90 backdrop-blur-md transition-all duration-300 hover:border-white/55 hover:text-white"
                 aria-label={link.label}
               >
-                <Icon size={18} />
+                <span className="pointer-events-none absolute inset-0 rounded-full bg-linear-to-br from-[#00A2E8]/14 via-[#10069F]/12 to-[#E32118]/14 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="pointer-events-none absolute -inset-1 rounded-full border border-[#00A2E8]/55 opacity-0 scale-95 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
+                <span className="pointer-events-none absolute -inset-1.5 rounded-full border border-[#E32118]/35 opacity-0 scale-90 transition-all duration-400 group-hover:opacity-100 group-hover:scale-100" />
+                <span className="relative z-10">
+                  <Icon size={18} />
+                </span>
                 {isGithub && (
                   <span className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 select-none rounded-full border border-white/60 bg-white/90 px-2 py-px text-[9px] font-bold text-[#10069F] shadow-sm">
                     {badgeText}
@@ -264,7 +272,7 @@ export default function Contact({ language }: { language: Language }) {
           transition={{ duration: 0.8 }}
           className="flex flex-col"
         >
-          <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:gap-4 lg:hidden">
+          <div key={`contact-mobile-links-${language}`} className="mb-8 flex flex-col gap-3 sm:mb-10 sm:gap-4 lg:hidden">
             {contactDetails.map((item, index) => {
               const Icon = item.icon;
               const itemKey = `${item.label}-${item.value}`;
@@ -276,17 +284,29 @@ export default function Contact({ language }: { language: Language }) {
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 18, x: -14, scale: 0.98, filter: "blur(4px)" }}
+                  whileInView={{ opacity: 1, y: 0, x: 0, scale: 1, filter: "blur(0px)" }}
                   viewport={{ once: true, amount: 0.2 }}
-                  transition={{ delay: 0.05 * index, duration: 0.35, ease: "easeOut" }}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.995 }}
-                  className="group relative flex items-center gap-3 overflow-hidden rounded-full border border-white/25 bg-black/35 px-4 py-3 text-white/95 backdrop-blur-md transition-all duration-300 hover:border-white/45 hover:bg-white/10 sm:gap-4 sm:px-6 sm:py-4"
+                  transition={{ delay: 0.05 * index, duration: 0.46, ease: [0.16, 1, 0.3, 1] }}
+                  whileTap={{ scale: 0.988, y: 1 }}
+                  className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-white/16 bg-white/3 px-4 py-3.5 text-white/95 backdrop-blur-md transition-all duration-300 active:border-[#00A2E8]/45 active:bg-white/6 sm:gap-4 sm:px-6 sm:py-4"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/95 sm:h-11 sm:w-11">
-                    <Icon size={20} />
+                  <span className="pointer-events-none absolute left-0 top-0 h-full w-1">
+                    <span className="block h-1/3 bg-[#00A2E8]" />
+                    <span className="block h-1/3 bg-[#10069F]" />
+                    <span className="block h-1/3 bg-[#E32118]" />
                   </span>
+
+                  <motion.span
+                    initial={{ scale: 0.94, opacity: 0.85 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.08 * index, duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-[#00A2E8]/62 via-[#10069F]/62 to-[#E32118]/62 p-px sm:h-11 sm:w-11"
+                  >
+                    <span className="flex h-full w-full items-center justify-center rounded-full border border-white/15 bg-[#090a0d] text-white/95">
+                      <Icon size={18} />
+                    </span>
+                  </motion.span>
 
                   <span className="min-w-0 flex-1 leading-tight">
                     <span className="block text-[10px] uppercase tracking-[0.18em] text-white/45 sm:text-[11px]">
@@ -303,12 +323,12 @@ export default function Contact({ language }: { language: Language }) {
                         type="button"
                         onClick={(event) => handleCopyContactValue(event, itemKey, item.value, item.label)}
                         aria-label={`Copy ${item.label}`}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white/85 transition-all duration-300 hover:border-white/45 hover:bg-white/10 hover:text-white"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/18 bg-[#0b0d12] text-white/85 transition-all duration-300 active:border-[#00A2E8]/55 active:bg-linear-to-r active:from-[#00A2E8]/22 active:via-[#10069F]/20 active:to-[#E32118]/22 active:text-white"
                       >
                         {wasCopied ? <Check size={14} /> : <Copy size={14} />}
                       </button>
                     )}
-                    <span className="text-lg leading-none text-white/65 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-white/95">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-[#0b0d12] text-lg leading-none text-white/65 transition-all duration-300 group-active:translate-x-0.5 group-active:border-[#00A2E8]/45 group-active:text-[#00A2E8]">
                       &rarr;
                     </span>
                   </div>
@@ -330,6 +350,7 @@ export default function Contact({ language }: { language: Language }) {
           </motion.div>
 
           <motion.h2
+            key={`contact-title-${language}`}
             variants={{
               hidden: { opacity: 1 },
               show: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -368,17 +389,17 @@ export default function Contact({ language }: { language: Language }) {
             <div className="pointer-events-none absolute -bottom-16 -left-16 h-44 w-44 rounded-full bg-white/5 blur-3xl transition-all duration-700" />
             <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#00A2E8]/10 blur-2xl sm:h-40 sm:w-40 md:h-52 md:w-52" />
 
-            <div className="relative z-10 mb-8 sm:mb-10">
+            <div key={`contact-intro-${language}`} className="relative z-10 mb-8 sm:mb-10">
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.6 }}
-                className="group relative rounded-xl border border-white/10 bg-gradient-to-r from-white/5 to-white/[0.02] p-5 sm:p-6 transition-all duration-500 hover:border-white/20 hover:bg-white/8 flex items-start gap-4 sm:gap-5 overflow-hidden"
+                className="group relative rounded-xl border border-white/10 bg-linear-to-r from-white/5 to-white/2 p-5 sm:p-6 transition-all duration-500 hover:border-white/20 hover:bg-white/8 flex items-start gap-4 sm:gap-5 overflow-hidden"
               >
                 {/* Top accent line */}
                 <div className="absolute top-0 left-0 right-0 h-1 flex gap-0">
-                  <div className="flex-1 bg-gradient-to-r from-[#00A2E8] via-[#10069F] to-[#E32118]" />
+                  <div className="flex-1 bg-linear-to-r from-[#00A2E8] via-[#10069F] to-[#E32118]" />
                 </div>
 
                 {/* BMW color stripe */}

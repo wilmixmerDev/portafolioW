@@ -154,14 +154,14 @@ export default function Contact({ language }: { language: Language }) {
       setTimeout(() => {
         setContactStatus("idle");
         setContactStatusMessage("");
-      }, 2000);
+      }, 8000);
     } catch (error) {
       setContactStatus("error");
       setContactStatusMessage(error instanceof Error ? error.message : t.errorMsg);
       setTimeout(() => {
         setContactStatus("idle");
         setContactStatusMessage("");
-      }, 2000);
+      }, 8000);
     }
   };
 

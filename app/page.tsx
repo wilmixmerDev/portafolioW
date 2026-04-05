@@ -17,16 +17,12 @@ import { Language } from "./i18n/translations";
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("es");
-  const [mounted, setMounted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const browserLang = navigator.language.startsWith("es") ? "es" : "en";
     setLanguage(browserLang);
-    setMounted(true);
   }, []);
-
-  if (!mounted) return null;
 
   return (
     <>

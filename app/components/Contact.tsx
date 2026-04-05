@@ -539,6 +539,28 @@ export default function Contact({ language }: { language: Language }) {
           </div>
         </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 14, filter: "blur(4px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="mx-auto mt-12 w-full max-w-3xl px-1 sm:mt-16"
+      >
+        <div className="group relative overflow-hidden rounded-2xl border border-white/15 bg-linear-to-r from-white/8 via-white/3 to-white/8 px-4 py-3 backdrop-blur-md sm:px-6 sm:py-3.5">
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex h-0.5">
+            <span className="h-full w-1/3 bg-[#00A2E8]" />
+            <span className="h-full w-1/3 bg-[#10069F]" />
+            <span className="h-full w-1/3 bg-[#E32118]" />
+          </div>
+          <div className="pointer-events-none absolute -left-8 top-1/2 h-16 w-16 -translate-y-1/2 rounded-full bg-[#00A2E8]/10 blur-2xl transition-opacity duration-500 group-hover:opacity-80" />
+          <div className="pointer-events-none absolute -right-8 top-1/2 h-16 w-16 -translate-y-1/2 rounded-full bg-[#E32118]/10 blur-2xl transition-opacity duration-500 group-hover:opacity-80" />
+
+          <p className="relative text-center text-[10px] uppercase tracking-[0.16em] text-white/70 sm:text-xs">
+            {t.updateNote}
+          </p>
+        </div>
+      </motion.div>
     </section>
   );
 }

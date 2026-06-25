@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { translations, Language } from "../i18n/translations";
+import { translations } from "../i18n/translations";
+import { useLanguage } from "../context/LanguageContext";
 
 const techStack = [
   { key: "java", label: "Java", iconSlug: "openjdk", spanClass: "sm:col-span-3 lg:col-span-3" },
@@ -16,7 +17,8 @@ const techStack = [
   { key: "tw", label: "Tailwind", iconSlug: "tailwindcss", spanClass: "sm:col-span-3 lg:col-span-3" },
 ] as const;
 
-export default function Stack({ language }: { language: Language }) {
+export default function Stack() {
+  const { language } = useLanguage();
   const t = translations[language].engine;
 
   const adaptabilitySignals =

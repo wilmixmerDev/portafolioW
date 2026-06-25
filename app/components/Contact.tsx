@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Mail, Phone, Github, Linkedin, Copy, Check } from "lucide-react";
-import { translations, Language } from "../i18n/translations";
+import { translations } from "../i18n/translations";
+import { useLanguage } from "../context/LanguageContext";
 
 const DiscordIcon = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -19,7 +20,8 @@ type ContactFormData = {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function Contact({ language }: { language: Language }) {
+export default function Contact() {
+  const { language } = useLanguage();
   const t = translations[language].contact;
 
   const [copiedContactKey, setCopiedContactKey] = useState<string | null>(null);

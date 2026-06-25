@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import Loader from "./components/Loader";
-import { Language } from "./i18n/translations";
+import { LanguageProvider } from "./context/LanguageContext";
 
-// Componentes que no necesitan SSR ni estar en el bundle inicial
 const BackgroundVideo = dynamic(() => import("./components/BackgroundVideo"), { ssr: false, loading: () => null });
 const Projects        = dynamic(() => import("./components/Projects"),        { ssr: false, loading: () => null });
 const Stack           = dynamic(() => import("./components/Stack"),           { ssr: false, loading: () => null });
@@ -19,20 +18,10 @@ const NoiseOverlay    = dynamic(() => import("./components/NoiseOverlay"),    { 
 const ScrollProgress  = dynamic(() => import("./components/ScrollProgress"),  { ssr: false, loading: () => null });
 
 export default function Home() {
-  const [language, setLanguage] = useState<Language>("es");
-  const [mounted, setMounted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    const browserLang = navigator.language.startsWith("es") ? "es" : "en";
-    setLanguage(browserLang);
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
   return (
-    <>
+    <LanguageProvider>
       <Loader onComplete={() => setIsLoaded(true)} />
       <CustomCursor />
       <NoiseOverlay />
@@ -41,18 +30,18 @@ export default function Home() {
       <div className="relative flex min-h-dvh flex-col bg-black text-[#e2e2e2]">
         <BackgroundVideo isLoaded={isLoaded} />
 
-        <Navigation language={language} setLanguage={setLanguage} />
+        <Navigation />
 
         <main className="relative z-20">
-          <Hero language={language} isLoaded={isLoaded} />
-          <Projects language={language} />
-          <Stack language={language} />
+          <Hero isLoaded={isLoaded} />
+          <Projects />
+          <Stack />
           <BMWMarquee />
-          <Contact language={language} />
+          <Contact />
         </main>
 
-        <Footer language={language} />
+        <Footer />
       </div>
-    </>
+    </LanguageProvider>
   );
 }

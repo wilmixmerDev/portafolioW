@@ -2,14 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { translations, Language } from "../i18n/translations";
+import { translations } from "../i18n/translations";
+import { useLanguage } from "../context/LanguageContext";
 
-interface NavigationProps {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-}
-
-export default function Navigation({ language, setLanguage }: NavigationProps) {
+export default function Navigation() {
+  const { language, setLanguage } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {

@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { translations, Language } from "../i18n/translations";
+import { translations } from "../i18n/translations";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 const projectsList = [
   {
@@ -35,7 +36,8 @@ const projectsList = [
   },
 ];
 
-export default function Projects({ language }: { language: Language }) {
+export default function Projects() {
+  const { language } = useLanguage();
   const t = translations[language].projects;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);

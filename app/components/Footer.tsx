@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { translations, Language } from "../i18n/translations";
+import { translations } from "../i18n/translations";
 import { scrollToSection } from "../utils/scroll";
+import { useLanguage } from "../context/LanguageContext";
 
-export default function Footer({ language }: { language: Language }) {
+export default function Footer() {
+  const { language } = useLanguage();
   const t = translations[language];
 
   return (

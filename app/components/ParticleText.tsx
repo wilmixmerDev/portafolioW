@@ -204,14 +204,20 @@ export default function ParticleText({ text }: { text: string }) {
     }
 
     // ── Animation loop ─────────────────────────────────────────────────────
-    const animate = () => {
-      ctx.clearRect(0, 0, CW, CH);
-      const assembling = isHoveredRef.current;
-      for (const p of particles) { p.update(assembling); p.draw(ctx); }
+    // Cuando idle corre a 30 fps para ahorrar CPU; cuando hover a 60 fps.
+    const IDLE_INTERVAL = 1000 / 30;
+    let lastFrameTime = 0;
+
+    const animate = (time: number) => {
       animId = requestAnimationFrame(animate);
+      const assembling = isHoveredRef.current;
+      if (!assembling && time - lastFrameTime < IDLE_INTERVAL) return;
+      lastFrameTime = time;
+      ctx.clearRect(0, 0, CW, CH);
+      for (const p of particles) { p.update(assembling); p.draw(ctx); }
     };
 
-    animate();
+    animate(0);
     return () => cancelAnimationFrame(animId);
   }, [text]);
 

@@ -42,7 +42,7 @@ export default function BMWParticleRoundel() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const SIZE = 160; // canvas px
@@ -152,13 +152,18 @@ export default function BMWParticleRoundel() {
     canvas.height = SIZE;
     const particles = targets.map((t) => new Particle(t));
 
-    const tick = () => {
-      ctx.clearRect(0, 0, SIZE, SIZE);
-      const assemble = isHoveredRef.current;
-      for (const p of particles) { p.update(assemble); p.draw(ctx); }
+    const IDLE_INTERVAL = 1000 / 30;
+    let lastFrameTime = 0;
+
+    const tick = (time: number) => {
       animId = requestAnimationFrame(tick);
+      const assemble = isHoveredRef.current;
+      if (!assemble && time - lastFrameTime < IDLE_INTERVAL) return;
+      lastFrameTime = time;
+      ctx.clearRect(0, 0, SIZE, SIZE);
+      for (const p of particles) { p.update(assemble); p.draw(ctx); }
     };
-    tick();
+    tick(0);
 
     return () => cancelAnimationFrame(animId);
   }, []);

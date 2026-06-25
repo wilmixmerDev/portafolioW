@@ -46,7 +46,7 @@ export default function BackgroundVideo({ isLoaded }: { isLoaded: boolean }) {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           className="h-full w-full object-cover"
           onError={() => setVideoFailed(true)}
         >

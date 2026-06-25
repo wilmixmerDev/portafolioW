@@ -1,19 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BackgroundVideo from "./components/BackgroundVideo";
+import dynamic from "next/dynamic";
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
-import Projects from "./components/Projects";
-import Stack from "./components/Stack";
-import BMWMarquee from "./components/BMWMarquee";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 import Loader from "./components/Loader";
-import CustomCursor from "./components/CustomCursor";
-import NoiseOverlay from "./components/NoiseOverlay";
-import ScrollProgress from "./components/ScrollProgress";
 import { Language } from "./i18n/translations";
+
+// Componentes que no necesitan SSR ni estar en el bundle inicial
+const BackgroundVideo = dynamic(() => import("./components/BackgroundVideo"), { ssr: false, loading: () => null });
+const Projects        = dynamic(() => import("./components/Projects"),        { ssr: false, loading: () => null });
+const Stack           = dynamic(() => import("./components/Stack"),           { ssr: false, loading: () => null });
+const BMWMarquee      = dynamic(() => import("./components/BMWMarquee"),      { ssr: false, loading: () => null });
+const Contact         = dynamic(() => import("./components/Contact"),         { ssr: false, loading: () => null });
+const Footer          = dynamic(() => import("./components/Footer"),          { ssr: false, loading: () => null });
+const CustomCursor    = dynamic(() => import("./components/CustomCursor"),    { ssr: false, loading: () => null });
+const NoiseOverlay    = dynamic(() => import("./components/NoiseOverlay"),    { ssr: false, loading: () => null });
+const ScrollProgress  = dynamic(() => import("./components/ScrollProgress"),  { ssr: false, loading: () => null });
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("es");

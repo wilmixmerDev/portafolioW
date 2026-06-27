@@ -9,6 +9,15 @@ import { useLanguage } from "../context/LanguageContext";
 const projectsList = [
   {
     id: "01",
+    title: "fitW",
+    tags: ["PWA", "Full-Stack", "Next.js", "TypeScript"],
+    year: "2026",
+    link: "https://fitw.vercel.app",
+    descES: "PWA de seguimiento nutricional y calórico para atletas. Calcula TDEE y macros con la fórmula Mifflin-St Jeor, sistema de recetas proporcionales, registro de alimentos y gráficos de tendencia de peso.",
+    descEN: "Nutritional and calorie tracking PWA for athletes. Calculates TDEE and macros using Mifflin-St Jeor formula, proportional recipe system, food logging, and weight trend charts."
+  },
+  {
+    id: "02",
     title: "Urosalud",
     tags: ["Healthcare", "Full-Stack"],
     year: "2024",
@@ -17,7 +26,7 @@ const projectsList = [
     descEN: "Comprehensive appointment and telemedicine management platform for urological specialists."
   },
   {
-    id: "02",
+    id: "03",
     title: "EasyPlanning",
     tags: ["Booking", "Events"],
     year: "2024",
@@ -26,7 +35,7 @@ const projectsList = [
     descEN: "Event hall booking and corporate schedule planning system."
   },
   {
-    id: "03",
+    id: "04",
     title: "Portfolio",
     tags: ["Next.js", "React", "Framer Motion"],
     year: "2026",
@@ -106,7 +115,7 @@ export default function Projects() {
           key={language}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.6, margin: "0px 0px -18% 0px" }}
+          viewport={{ once: true, amount: 0.6, margin: "0px 0px -18% 0px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-20 mb-10 flex w-full max-w-full flex-col items-start gap-3 border-b border-white/10 pb-5 sm:mb-12 sm:gap-4 sm:pb-6 md:w-fit md:flex-row md:items-end md:gap-6 md:pb-8"
         >
@@ -239,6 +248,8 @@ export default function Projects() {
                 <div className="shrink-0 transition-transform duration-500 group-hover:-translate-y-2 group-hover:translate-x-2">
                   <a
                     href={currentProject.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={(event) => event.stopPropagation()}
                     className="relative flex items-center justify-center rounded-full bg-white p-3 text-black transition-transform duration-300 hover:scale-105 sm:p-4"
                     aria-label={language === "es" ? `Abrir ${currentProject.title}` : `Open ${currentProject.title}`}

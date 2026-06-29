@@ -19,7 +19,7 @@ export const translations = {
       highlights: ["APIs & Backend", "Interfaces Modernas", "Arquitectura Escalable"],
       specs: [
         { label: "Tipo",      value: "Full-Stack"   },
-        { label: "Motor",     value: "7 Tecnologías" },
+        { label: "Motor",     value: "10 Tecnologías" },
         { label: "Base",      value: "Colombia"      },
         { label: "Estado",    value: "Disponible"   },
       ],
@@ -33,6 +33,7 @@ export const translations = {
       subtitle: "Herramientas y lenguajes que domino",
       adaptability: "Me adapto rápido a nuevas tecnologías y frameworks según las necesidades del proyecto.",
       adaptabilityTitle: "Modo Adaptativo",
+      adaptabilitySignals: ["Aprendizaje rápido", "Cambio sin fricción", "Integración continua", "Resultados primero"],
     },
     contact: {
       title: "TRABAJEMOS JUNTOS EN\nPROYECTOS INCREÍBLES",
@@ -85,7 +86,7 @@ export const translations = {
       highlights: ["APIs & Backend", "Modern Interfaces", "Scalable Architecture"],
       specs: [
         { label: "Type",      value: "Full-Stack"    },
-        { label: "Engine",    value: "7 Technologies" },
+        { label: "Engine",    value: "10 Technologies" },
         { label: "Base",      value: "Colombia"       },
         { label: "Status",    value: "Available"      },
       ],
@@ -99,6 +100,7 @@ export const translations = {
       subtitle: "Languages and tools I work with",
       adaptability: "I quickly adapt to new technologies and frameworks based on project needs.",
       adaptabilityTitle: "Adaptive Mode",
+      adaptabilitySignals: ["Fast learning", "Low-friction changes", "Continuous integration", "Results first"],
     },
     contact: {
       title: "LET'S COLLABORATE ON\nAMAZING PROJECTS",

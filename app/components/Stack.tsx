@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { translations } from "../i18n/translations";
 import { useLanguage } from "../context/LanguageContext";
+import { BMWBadge } from "./BMWStripe";
 
 const CATEGORIES = [
   {
@@ -41,14 +42,18 @@ const CATEGORIES = [
   },
 ] as const;
 
+const techListVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.25 } },
+};
+const techItemVariants = {
+  hidden: { x: -16, opacity: 0 },
+  show: { x: 0, opacity: 1, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const } },
+};
+
 export default function Stack() {
   const { language } = useLanguage();
   const t = translations[language].engine;
-
-  const adaptabilitySignals =
-    language === "es"
-      ? ["Aprendizaje rápido", "Cambio sin fricción", "Integración continua", "Resultados primero"]
-      : ["Fast learning", "Low-friction changes", "Continuous integration", "Results first"];
 
   return (
     <section id="stack" className="relative overflow-hidden px-5 py-20 sm:px-6 sm:py-24 md:px-24 md:py-40">
@@ -68,7 +73,6 @@ export default function Stack() {
 
         {/* Header — izquierda alineado como Projects */}
         <motion.div
-          key={language}
           initial={{ x: -60, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -79,11 +83,7 @@ export default function Stack() {
             {t.subtitle}
           </span>
           <div className="flex items-center gap-4">
-            <span className="flex h-5 w-7">
-              <span className="h-full w-1/3 -skew-x-20 bg-[#00A2E8]" />
-              <span className="-ml-0.5 h-full w-1/3 -skew-x-20 bg-[#10069F]" />
-              <span className="-ml-0.5 h-full w-1/3 -skew-x-20 bg-[#E32118]" />
-            </span>
+            <BMWBadge />
             <h2 className="font-headline text-2xl font-bold uppercase tracking-widest text-white sm:text-3xl md:text-5xl">
               {t.title}
             </h2>
@@ -91,7 +91,7 @@ export default function Stack() {
         </motion.div>
 
         {/* Categorías — cada una entra desde una dirección distinta */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+        <div key={language} className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
           {CATEGORIES.map((cat, catIdx) => (
             <motion.div
               key={cat.key}
@@ -129,18 +129,17 @@ export default function Stack() {
                 </div>
 
                 {/* Lista de tecnologías */}
-                <div className="flex flex-col gap-0.5 pl-2">
-                  {cat.techs.map((tech, techIdx) => (
+                <motion.div
+                  className="flex flex-col gap-0.5 pl-2"
+                  variants={techListVariants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                >
+                  {cat.techs.map((tech) => (
                     <motion.div
                       key={tech.name}
-                      initial={{ x: -16, opacity: 0 }}
-                      whileInView={{ x: 0, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 0.45,
-                        delay: catIdx * 0.1 + techIdx * 0.07 + 0.15,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
+                      variants={techItemVariants}
                       whileHover={{ x: 5, transition: { type: "spring", stiffness: 400, damping: 20 } }}
                       className="group/item flex cursor-default items-center justify-between rounded-lg px-3 py-2.5 transition-colors duration-200 hover:bg-white/5"
                     >
@@ -155,7 +154,7 @@ export default function Stack() {
                       </span>
                     </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}
@@ -179,7 +178,7 @@ export default function Stack() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {adaptabilitySignals.map((signal, i) => (
+            {t.adaptabilitySignals.map((signal, i) => (
               <motion.span
                 key={signal}
                 initial={{ opacity: 0, scale: 0.85 }}

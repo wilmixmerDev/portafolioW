@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { translations } from "../i18n/translations";
 import { scrollToSection } from "../utils/scroll";
 import { useLanguage } from "../context/LanguageContext";
+import { BMWTopBorder } from "./BMWStripe";
 
 export default function Footer() {
   const { language } = useLanguage();
@@ -14,12 +15,7 @@ export default function Footer() {
       key={language}
       className="relative z-20 mt-auto w-full overflow-hidden border-t border-white/5 bg-black/40 px-3 py-6 sm:px-4 sm:py-8 md:px-10 md:py-16"
     >
-      {/* BMW tricolor stripe at top of footer */}
-      <div className="absolute left-0 top-0 flex h-0.5 w-full">
-        <div className="h-full w-1/3 bg-[#00A2E8]/70" />
-        <div className="h-full w-1/3 bg-[#10069F]/70" />
-        <div className="h-full w-1/3 bg-[#E32118]/70" />
-      </div>
+      <BMWTopBorder dim />
 
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 md:flex-row md:gap-0">
         {/* Left: copyright */}

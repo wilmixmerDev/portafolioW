@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { translations } from "../i18n/translations";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import { BMWBadge } from "./BMWStripe";
 
 const projectsList = [
   {
@@ -13,35 +14,45 @@ const projectsList = [
     tags: ["PWA", "Full-Stack", "Next.js", "TypeScript"],
     year: "2026",
     link: "https://fitw.vercel.app",
-    descES: "PWA de seguimiento nutricional y calórico para atletas. Calcula TDEE y macros con la fórmula Mifflin-St Jeor, sistema de recetas proporcionales, registro de alimentos y gráficos de tendencia de peso.",
-    descEN: "Nutritional and calorie tracking PWA for athletes. Calculates TDEE and macros using Mifflin-St Jeor formula, proportional recipe system, food logging, and weight trend charts."
+    github: "https://github.com/wilmixmerDev/fitW",
+    descES: "Aplicación nutricional para atletas con cálculo de macros, registro de alimentos y seguimiento de peso.",
+    descEN: "Nutritional app for athletes with macro tracking, food logging, and weight trend monitoring.",
   },
   {
     id: "02",
-    title: "Urosalud",
-    tags: ["Healthcare", "Full-Stack"],
-    year: "2024",
-    link: "#",
-    descES: "Plataforma integral de gestión de citas y telemedicina para especialistas urológicos.",
-    descEN: "Comprehensive appointment and telemedicine management platform for urological specialists."
+    title: "FinSight",
+    tags: ["Python", "React", "Data"],
+    year: "2025",
+    github: "https://github.com/wilmixmerDev/FinSightColombia",
+    descES: "Plataforma de análisis financiero con ML y NLP para predecir indicadores económicos colombianos como la TRM e inflación.",
+    descEN: "Financial platform using ML and NLP to forecast Colombian economic indicators including the TRM and inflation rates.",
   },
   {
     id: "03",
-    title: "EasyPlanning",
-    tags: ["Booking", "Events"],
+    title: "ScrapingTec",
+    tags: ["Python", "Playwright", "Automation"],
     year: "2024",
-    link: "#",
-    descES: "Sistema de reservas de salones de eventos y planificación de horarios corporativos.",
-    descEN: "Event hall booking and corporate schedule planning system."
+    github: "https://github.com/wilmixmerDev/scrapingTec",
+    descES: "Bot de automatización para publicar en foros educativos Ferrum/Moodle simulando comportamiento humano en el navegador.",
+    descEN: "Automation bot simulating human browser behavior to post on Ferrum (Moodle) educational platform forums.",
   },
   {
     id: "04",
-    title: "Portfolio",
-    tags: ["Next.js", "React", "Framer Motion"],
-    year: "2026",
-    link: "#",
-    descES: "Experiencia web interactiva con físicas avanzadas de partículas y componentes de alto rendimiento.",
-    descEN: "Interactive web experience with advanced particle physics and high-performance components."
+    title: "Funcepal",
+    tags: ["PHP", "Laravel", "Full-Stack"],
+    year: "2024",
+    github: "https://github.com/wilmixmerDev/funcepal",
+    descES: "Sistema web para la gestión de personal, solicitudes y reportes administrativos de una organización.",
+    descEN: "Web system for managing staff, requests, and administrative reports for an organization.",
+  },
+  {
+    id: "05",
+    title: "Centro Médico",
+    tags: ["NestJS", "Next.js", "TypeScript"],
+    year: "2024",
+    github: "https://github.com/wilmixmerDev/CentroMedicoDrAlvaro",
+    descES: "Plataforma para centralizar digitalmente los procesos médicos de un centro de salud.",
+    descEN: "Platform to digitally centralize the medical processes of a healthcare center.",
   },
 ];
 
@@ -53,6 +64,7 @@ export default function Projects() {
   const [mobileInfoOpen, setMobileInfoOpen] = useState(false);
   const currentProject = projectsList[currentIndex];
   const visibleTags = currentProject.tags.slice(0, 2);
+  const desc = language === "es" ? currentProject.descES : currentProject.descEN;
 
   useEffect(() => {
     setMobileInfoOpen(false);
@@ -125,11 +137,7 @@ export default function Projects() {
               ///M POWER
             </div>
             <motion.h2 className="relative z-10 flex flex-col items-start gap-2 font-headline text-[2.1rem] font-bold uppercase leading-[0.95] tracking-[0.08em] text-white sm:text-4xl sm:tracking-widest md:flex-row md:items-center md:gap-4 md:text-5xl md:tracking-[0.15em] lg:text-6xl">
-              <span className="mb-1 flex h-5 w-7 md:mb-0 md:h-6 md:w-8">
-                <span className="h-full w-1/3 -skew-x-20 bg-[#00A2E8]" />
-                <span className="-ml-0.5 h-full w-1/3 -skew-x-20 bg-[#10069F]" />
-                <span className="-ml-0.5 h-full w-1/3 -skew-x-20 bg-[#E32118]" />
-              </span>
+              <BMWBadge className="mb-1 flex h-5 w-7 md:mb-0 md:h-6 md:w-8" />
               {t.title}
             </motion.h2>
             <span className="relative z-10 mt-2 block font-label text-[9px] uppercase tracking-[0.14em] text-white/35 sm:text-[10px] sm:tracking-[0.2em] md:text-[0.6rem] md:tracking-[0.3em]">
@@ -189,7 +197,7 @@ export default function Projects() {
                   {currentProject.id}
                 </div>
                 <div className="font-label flex items-center gap-2 rounded-full border border-white/12 bg-black/40 px-4 py-1.5 text-[11px] uppercase tracking-[0.22em] text-white/55">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
+                  <span className={`h-1.5 w-1.5 rounded-full ${currentProject.link ? "bg-emerald-400" : "bg-white/40"}`} />
                   {currentProject.year}
                 </div>
               </div>
@@ -200,7 +208,7 @@ export default function Projects() {
                     {currentProject.title}
                   </h3>
                   <p className="text-white/60 mb-6 max-w-sm sm:max-w-md text-sm sm:text-base leading-relaxed opacity-0 -translate-y-4 transition-all duration-500 hidden md:block group-hover:opacity-100 group-hover:translate-y-0">
-                    {language === "es" ? currentProject.descES : currentProject.descEN}
+                    {desc}
                   </p>
                   <div className="flex min-h-10 flex-wrap gap-2.5">
                     {visibleTags.map((tag) => (
@@ -239,34 +247,52 @@ export default function Projects() {
                       className="overflow-hidden"
                     >
                       <p className="max-w-sm pb-0.5 text-sm leading-relaxed text-white/65">
-                        {language === "es" ? currentProject.descES : currentProject.descEN}
+                        {desc}
                       </p>
                     </motion.div>
                   </div>
                 </div>
 
-                <div className="shrink-0 transition-transform duration-500 group-hover:-translate-y-2 group-hover:translate-x-2">
-                  <a
-                    href={currentProject.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(event) => event.stopPropagation()}
-                    className="relative flex items-center justify-center rounded-full bg-white p-3 text-black transition-transform duration-300 hover:scale-105 sm:p-4"
-                    aria-label={language === "es" ? `Abrir ${currentProject.title}` : `Open ${currentProject.title}`}
-                  >
-                    <span className="pointer-events-none absolute -inset-1 -z-10 rounded-full bg-linear-to-r from-[#00A2E8]/60 via-[#10069F]/60 to-[#E32118]/60 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="-rotate-45 sm:h-6 sm:w-6">
-                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
-                </div>
+                {(currentProject.link || currentProject.github) && (
+                  <div className="shrink-0 flex items-end gap-2 transition-transform duration-500 group-hover:-translate-y-2">
+                    {currentProject.github && (
+                      <a
+                        href={currentProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(event) => event.stopPropagation()}
+                        className="flex items-center justify-center rounded-full border border-white/20 bg-white/5 p-3 text-white/60 transition-all duration-300 hover:border-white/50 hover:bg-white/10 hover:text-white sm:p-4"
+                        aria-label={language === "es" ? `Código de ${currentProject.title} en GitHub` : `${currentProject.title} source code on GitHub`}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="sm:h-5 sm:w-5">
+                          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                      </a>
+                    )}
+                    {currentProject.link && (
+                      <a
+                        href={currentProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(event) => event.stopPropagation()}
+                        className="relative flex items-center justify-center rounded-full bg-white p-3 text-black transition-transform duration-300 hover:scale-105 sm:p-4"
+                        aria-label={language === "es" ? `Abrir ${currentProject.title}` : `Open ${currentProject.title}`}
+                      >
+                        <span className="pointer-events-none absolute -inset-1 -z-10 rounded-full bg-linear-to-r from-[#00A2E8]/60 via-[#10069F]/60 to-[#E32118]/60 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="-rotate-45 sm:h-6 sm:w-6">
+                          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.article>
           </AnimatePresence>
         </div>
 
         {/* Custom Navigation Controls */}
-        <div className="relative z-20 mt-6 flex items-center justify-center gap-4 sm:mt-12 sm:gap-6">
+        {projectsList.length > 1 && <div className="relative z-20 mt-6 flex items-center justify-center gap-4 sm:mt-12 sm:gap-6">
           <button 
             onClick={prevProject}
             className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white/70 transition-all hover:scale-110 hover:border-white/50 hover:bg-white hover:text-black focus:outline-none sm:h-14 sm:w-14"
@@ -298,7 +324,7 @@ export default function Projects() {
           >
             <ChevronRight size={20} className="transition-transform group-hover:translate-x-1 sm:h-6 sm:w-6" />
           </button>
-        </div>
+        </div>}
 
       </div>
     </section>

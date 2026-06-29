@@ -10,16 +10,29 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
+const STORAGE_KEY = "portfolio-lang";
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("es");
 
   useEffect(() => {
-    const browserLang = navigator.language.startsWith("es") ? "es" : "en";
-    setLanguage(browserLang);
+    const stored = localStorage.getItem(STORAGE_KEY) as Language | null;
+    if (stored === "es" || stored === "en") {
+      setLanguage(stored);
+    } else {
+      const detected: Language = navigator.language.startsWith("es") ? "es" : "en";
+      setLanguage(detected);
+      localStorage.setItem(STORAGE_KEY, detected);
+    }
   }, []);
 
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem(STORAGE_KEY, lang);
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

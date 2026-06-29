@@ -5,6 +5,7 @@ import { translations } from "../i18n/translations";
 import { scrollToSection } from "../utils/scroll";
 import ParticleText from "./ParticleText";
 import { useLanguage } from "../context/LanguageContext";
+import { BMWTopBorder } from "./BMWStripe";
 
 export default function Hero({ isLoaded }: { isLoaded: boolean }) {
   const { language } = useLanguage();
@@ -74,11 +75,9 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
 
         {isLoaded && (
           <motion.div
-            key={`hero-content-${language}`}
             variants={container}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            animate="show"
             className="mt-14 grid grid-cols-1 items-start gap-8 sm:mt-18 md:mt-24 md:grid-cols-12 md:gap-12"
           >
             {/* Bio */}
@@ -94,12 +93,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
               className="md:col-start-9 md:col-span-4"
             >
               <div className="relative rounded-2xl border border-white/10 bg-black/50 backdrop-blur-md overflow-hidden">
-                {/* BMW tricolor stripe */}
-                <div className="absolute top-0 left-0 w-full h-[2px] flex">
-                  <div className="w-1/3 h-full bg-[#00A2E8]" />
-                  <div className="w-1/3 h-full bg-[#10069F]" />
-                  <div className="w-1/3 h-full bg-[#E32118]" />
-                </div>
+                <BMWTopBorder />
 
                 <div className="flex flex-col pt-5">
                   {/* Highlights */}

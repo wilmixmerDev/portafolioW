@@ -54,6 +54,15 @@ const projectsList = [
     descES: "Plataforma para centralizar digitalmente los procesos médicos de un centro de salud.",
     descEN: "Platform to digitally centralize the medical processes of a healthcare center.",
   },
+  {
+    id: "06",
+    title: "JournalW",
+    tags: ["Next.js", "TypeScript", "Supabase"],
+    year: "2026",
+    github: "https://github.com/wilmixmerDev/journalW",
+    descES: "Diario de trading profesional para registrar operaciones, analizar métricas y alternar entre trading en vivo y backtesting.",
+    descEN: "Professional trading journal to log trades, track performance metrics, and switch between live and backtest modes.",
+  },
 ];
 
 export default function Projects() {

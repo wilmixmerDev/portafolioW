@@ -16,6 +16,7 @@ const CATEGORIES = [
       { name: "Spring Boot", detail: "v3.x"       },
       { name: "PHP",         detail: "8.x"        },
       { name: "Laravel",     detail: "v11"        },
+      { name: "Docker",      detail: "v27"        },
     ],
   },
   {

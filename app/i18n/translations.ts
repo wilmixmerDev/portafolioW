@@ -19,7 +19,7 @@ export const translations = {
       highlights: ["APIs & Backend", "Interfaces Modernas", "Arquitectura Escalable"],
       specs: [
         { label: "Tipo",      value: "Full-Stack"   },
-        { label: "Motor",     value: "10 Tecnologías" },
+        { label: "Motor",     value: "11 Tecnologías" },
         { label: "Base",      value: "Colombia"      },
         { label: "Estado",    value: "Disponible"   },
       ],
@@ -86,7 +86,7 @@ export const translations = {
       highlights: ["APIs & Backend", "Modern Interfaces", "Scalable Architecture"],
       specs: [
         { label: "Type",      value: "Full-Stack"    },
-        { label: "Engine",    value: "10 Technologies" },
+        { label: "Engine",    value: "11 Technologies" },
         { label: "Base",      value: "Colombia"       },
         { label: "Status",    value: "Available"      },
       ],

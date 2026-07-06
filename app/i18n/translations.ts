@@ -17,6 +17,7 @@ export const translations = {
       showreel: "Ver Proyectos",
       quickContact: "Contacto rápido",
       downloadCV: "Descargar CV",
+      viewCV: "Ver CV",
       scroll: "Explorar",
       highlights: ["APIs & Backend", "Interfaces Modernas", "Arquitectura Escalable"],
       stats: [
@@ -108,6 +109,7 @@ export const translations = {
       showreel: "View Projects",
       quickContact: "Quick contact",
       downloadCV: "Download CV",
+      viewCV: "View CV",
       scroll: "Explore",
       highlights: ["APIs & Backend", "Modern Interfaces", "Scalable Architecture"],
       stats: [

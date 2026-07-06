@@ -162,18 +162,37 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
                       {t.quickContact}
                     </motion.button>
 
-                    <motion.a
-                      href="/CV_Wilmer_Iriarte.pdf"
-                      download
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="portfolio-btn group flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-transparent px-4 py-3 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/50 transition-all duration-300 hover:border-white/25 hover:text-white/80 sm:text-[10px]"
-                    >
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" className="transition-transform duration-300 group-hover:translate-y-0.5">
-                        <path d="M12 3v13M7 11l5 5 5-5M5 21h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                      {t.downloadCV}
-                    </motion.a>
+                    <div className="flex gap-2">
+                      {/* Ver CV */}
+                      <motion.a
+                        href="/CV_Wilmer_Iriarte.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="portfolio-btn group flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-transparent px-4 py-3 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/50 transition-all duration-300 hover:border-white/25 hover:text-white/80 sm:text-[10px]"
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+                        </svg>
+                        {t.viewCV}
+                      </motion.a>
+
+                      {/* Descargar CV */}
+                      <motion.a
+                        href="/CV_Wilmer_Iriarte.pdf"
+                        download
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center justify-center rounded-xl border border-white/10 bg-transparent p-3 text-white/40 transition-all duration-300 hover:border-white/25 hover:text-white/80"
+                        aria-label="Descargar CV"
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                          <path d="M12 3v13M7 11l5 5 5-5M5 21h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </motion.a>
+                    </div>
                   </div>
                 </div>
               </div>

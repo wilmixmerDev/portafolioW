@@ -16,6 +16,7 @@ const CATEGORIES = [
       { name: "Spring Boot", detail: "v3.x"       },
       { name: "PHP",         detail: "8.x"        },
       { name: "Laravel",     detail: "v11"        },
+      { name: "NestJS",      detail: "v10"        },
       { name: "Docker",      detail: "v27"        },
     ],
   },
@@ -33,12 +34,15 @@ const CATEGORIES = [
   },
   {
     key: "data",
-    label: { es: "Datos", en: "Data" },
+    label: { es: "Datos & ORM", en: "Data & ORM" },
     accent: "#E32118",
     entry: { x: 60, y: 0, opacity: 0 },
     techs: [
-      { name: "MySQL",      detail: "8.x" },
-      { name: "PostgreSQL", detail: "v16" },
+      { name: "MySQL",      detail: "8.x"  },
+      { name: "PostgreSQL", detail: "v16"  },
+      { name: "Supabase",   detail: "BaaS" },
+      { name: "SQLite",     detail: "v3"   },
+      { name: "Prisma ORM", detail: "v5"   },
     ],
   },
 ] as const;

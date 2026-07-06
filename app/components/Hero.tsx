@@ -26,7 +26,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
 
   return (
     <section key={language} id="about" className="flex min-h-screen flex-col px-5 pb-10 pt-28 sm:px-6 sm:pt-32 md:px-24 md:pt-48">
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col">
 
         {/* Eyebrow */}
         <motion.div
@@ -81,10 +81,27 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
             className="mt-14 grid grid-cols-1 items-start gap-8 sm:mt-18 md:mt-24 md:grid-cols-12 md:gap-12"
           >
             {/* Bio */}
-            <motion.div variants={item} className="md:col-span-8 flex items-start pr-2 sm:pr-8">
+            <motion.div variants={item} className="md:col-span-8 flex flex-col justify-between gap-10 pr-2 sm:pr-8">
               <p className="text-base font-light leading-relaxed text-white/80 sm:text-lg md:text-xl drop-shadow-[0_4px_16px_rgba(0,0,0,1)]">
                 {t.bio}
               </p>
+
+              {/* Stats row */}
+              <div className="flex flex-wrap gap-px overflow-hidden rounded-xl border border-white/8">
+                {t.stats.map((stat, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-1 flex-col items-center gap-1 bg-white/[0.03] px-5 py-4 text-center"
+                  >
+                    <span className="font-headline text-2xl font-bold text-white sm:text-3xl">
+                      {stat.value}
+                    </span>
+                    <span className="text-[9px] uppercase tracking-[0.2em] text-white/35 sm:text-[10px]">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
             {/* Spec card */}
@@ -144,10 +161,46 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
                     >
                       {t.quickContact}
                     </motion.button>
+
+                    <motion.a
+                      href="/CV_Wilmer_Iriarte.pdf"
+                      download
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="portfolio-btn group flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-transparent px-4 py-3 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/50 transition-all duration-300 hover:border-white/25 hover:text-white/80 sm:text-[10px]"
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" className="transition-transform duration-300 group-hover:translate-y-0.5">
+                        <path d="M12 3v13M7 11l5 5 5-5M5 21h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      {t.downloadCV}
+                    </motion.a>
                   </div>
                 </div>
               </div>
             </motion.div>
+          </motion.div>
+        )}
+
+        {/* Bottom bar — se pega al fondo del viewport */}
+        {isLoaded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="mt-auto flex items-center justify-between border-t border-white/8 pt-5"
+          >
+            <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+              {t.location}
+            </span>
+            <button
+              onClick={() => scrollToSection("projects")}
+              className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-white/25 transition-colors duration-300 hover:text-white/60"
+            >
+              <span>{t.scroll}</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="animate-bounce">
+                <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </motion.div>
         )}
       </div>

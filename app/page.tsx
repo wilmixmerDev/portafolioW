@@ -9,6 +9,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 
 const BackgroundVideo = dynamic(() => import("./components/BackgroundVideo"), { ssr: false, loading: () => null });
 const Projects        = dynamic(() => import("./components/Projects"),        { ssr: false, loading: () => null });
+const Experience      = dynamic(() => import("./components/Experience"),      { ssr: false, loading: () => null });
 const Stack           = dynamic(() => import("./components/Stack"),           { ssr: false, loading: () => null });
 const BMWMarquee      = dynamic(() => import("./components/BMWMarquee"),      { ssr: false, loading: () => null });
 const Contact         = dynamic(() => import("./components/Contact"),         { ssr: false, loading: () => null });
@@ -34,6 +35,7 @@ export default function Home() {
 
         <main className="relative z-20">
           <Hero isLoaded={isLoaded} />
+          <Experience />
           <Projects />
           <Stack />
           <BMWMarquee />

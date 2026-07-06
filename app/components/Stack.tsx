@@ -61,11 +61,22 @@ export default function Stack() {
   const t = translations[language].engine;
 
   return (
-    <section id="stack" className="relative overflow-hidden px-5 py-20 sm:px-6 sm:py-24 md:px-24 md:py-40">
+    <section id="stack" className="relative px-5 py-20 sm:px-6 sm:py-24 md:px-24 md:py-40">
 
-      {/* BMW Roundel watermark */}
-      <div className="pointer-events-none absolute right-0 top-0 -translate-y-1/4 translate-x-1/4 opacity-[0.04] sm:opacity-[0.06]">
-        <svg viewBox="0 0 500 500" className="h-64 w-64 sm:h-96 sm:w-96 md:h-120 md:w-120">
+      {/* BMW Roundel watermark — mobile: centrado sin corte */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.045] sm:hidden">
+        <svg viewBox="0 0 500 500" className="h-64 w-64">
+          <circle cx="250" cy="250" r="240" stroke="white" strokeWidth="12" fill="none" />
+          <circle cx="250" cy="250" r="155" stroke="white" strokeWidth="12" fill="none" />
+          <circle cx="250" cy="250" r="248" stroke="white" strokeWidth="4"  fill="none" />
+          <path d="M 250 95 A 155 155 0 0 1 405 250 L 250 250 Z" fill="white" />
+          <path d="M 250 405 A 155 155 0 0 1 95 250 L 250 250 Z" fill="white" />
+        </svg>
+      </div>
+
+      {/* BMW Roundel watermark — desktop: esquina superior derecha */}
+      <div className="pointer-events-none absolute right-0 top-0 hidden -translate-y-1/4 translate-x-1/4 opacity-[0.06] sm:block">
+        <svg viewBox="0 0 500 500" className="h-96 w-96 md:h-[30rem] md:w-[30rem]">
           <circle cx="250" cy="250" r="240" stroke="white" strokeWidth="12" fill="none" />
           <circle cx="250" cy="250" r="155" stroke="white" strokeWidth="12" fill="none" />
           <circle cx="250" cy="250" r="248" stroke="white" strokeWidth="4"  fill="none" />

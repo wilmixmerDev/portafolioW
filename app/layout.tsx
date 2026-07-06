@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wilmer's Portfolio — Built for Speed",
+  title: "Wilmer's Portfolio",
   description: "Portfolio of Wilmer Iriarte, a Full-Stack Developer specializing in modern web applications, scalable architecture, and premium UI experiences.",
   keywords: ["Wilmer Iriarte", "Full-Stack Developer", "Software Engineer", "Next.js", "React", "Portfolio"],
   icons: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     apple: "/bmw-tab.svg",
   },
   openGraph: {
-    title: "Wilmer's Portfolio — Built for Speed",
+    title: "Wilmer's Portfolio",
     description: "Full-Stack Developer crafting high-performance, beautiful software.",
     type: "website",
   },

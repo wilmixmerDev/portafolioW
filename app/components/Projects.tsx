@@ -33,8 +33,8 @@ const projectsList = [
     tags: ["Java", "Weka", "PHP", "Laravel"],
     year: "2026",
     github: "https://github.com/RINZLER0TP/Water-Quality-",
-    descES: "Modelo de IA para predecir potabilidad del agua comparando cuatro algoritmos de clasificación con metodología CRISP-DM. Motor en Java sobre Weka, orquestado desde Laravel.",
-    descEN: "AI model predicting water potability by comparing four classification algorithms using CRISP-DM. Training engine in Java over Weka API, orchestrated from Laravel.",
+    descES: "Modelo de IA para predecir potabilidad del agua comparando cuatro algoritmos de clasificación con metodología CRISP-DM.",
+    descEN: "AI model predicting water potability by comparing four classification algorithms using CRISP-DM methodology.",
   },
   {
     id: "04",
@@ -42,8 +42,8 @@ const projectsList = [
     tags: ["Python", "React", "ML", "NLP"],
     year: "2025",
     github: "https://github.com/wilmixmerDev/FinSightColombia",
-    descES: "Plataforma de análisis financiero con ML y NLP para predecir indicadores económicos colombianos como la TRM e inflación.",
-    descEN: "Financial platform using ML and NLP to forecast Colombian economic indicators including the TRM and inflation rates.",
+    descES: "Plataforma de análisis financiero con ML y NLP para predecir indicadores económicos colombianos.",
+    descEN: "Financial platform using ML and NLP to forecast Colombian economic indicators.",
   },
   {
     id: "05",
@@ -51,8 +51,8 @@ const projectsList = [
     tags: ["Next.js", "TypeScript", "Prisma", "SQLite"],
     year: "2025",
     github: "https://github.com/wilmixmerDev/WINDAQ",
-    descES: "Plataforma educativa de trading enfocada en análisis técnico del NASDAQ, con sesiones de análisis para desarrollar criterio propio sin depender de señales.",
-    descEN: "Educational trading platform focused on NASDAQ technical analysis, helping users build independent market judgment without relying on signals.",
+    descES: "Plataforma educativa de trading enfocada en análisis técnico del NASDAQ para desarrollar criterio propio.",
+    descEN: "Educational trading platform focused on NASDAQ technical analysis for independent market judgment.",
   },
   {
     id: "06",
@@ -78,19 +78,19 @@ const projectsList = [
     tags: ["Python", "Playwright", "Automation"],
     year: "2024",
     github: "https://github.com/wilmixmerDev/scrapingTec",
-    descES: "Bot de automatización para publicar en foros educativos Ferrum/Moodle simulando comportamiento humano en el navegador.",
+    descES: "Bot de automatización para publicar en foros educativos Ferrum/Moodle simulando comportamiento humano.",
     descEN: "Automation bot simulating human browser behavior to post on Ferrum (Moodle) educational platform forums.",
   },
 ];
 
-const listVariants = {
+const gridVariants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.07 } },
 };
 
-const rowVariants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } },
+const cardVariants = {
+  hidden: { opacity: 0, y: 28, scale: 0.97 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 const GitHubIcon = () => (
@@ -104,6 +104,140 @@ const ArrowIcon = () => (
     <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
+
+interface CardProps {
+  project: typeof projectsList[number];
+  index: number;
+  featured?: boolean;
+  language: string;
+}
+
+function ProjectCard({ project, index, featured = false, language }: CardProps) {
+  const accent = BMW_ACCENTS[index % 3];
+  const desc = language === "es" ? project.descES : project.descEN;
+
+  return (
+    <motion.article
+      variants={cardVariants}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] transition-all duration-500
+        hover:-translate-y-1.5 hover:border-white/18 hover:bg-white/[0.05]
+        ${featured ? "sm:col-span-2 min-h-[280px]" : "min-h-[240px]"}`}
+      style={{
+        boxShadow: "0 0 0 0 transparent",
+      }}
+      whileHover={{
+        boxShadow: `0 24px 60px -12px rgba(0,0,0,0.7), 0 0 0 1px ${accent}20`,
+      }}
+    >
+      {/* Top accent bar */}
+      <div className="h-[2px] w-full shrink-0" style={{ backgroundColor: accent }} />
+
+      {/* Corner glow al hover */}
+      <div
+        className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+        style={{ backgroundColor: `${accent}20` }}
+      />
+
+      {/* Número watermark */}
+      <span
+        className="pointer-events-none absolute bottom-3 right-4 select-none font-headline font-bold leading-none transition-all duration-500 group-hover:opacity-20 group-hover:scale-110"
+        style={{
+          fontSize: featured ? "8rem" : "6rem",
+          color: `${accent}14`,
+          lineHeight: 1,
+        }}
+        aria-hidden="true"
+      >
+        {project.id}
+      </span>
+
+      <div className="relative flex flex-1 flex-col gap-3 p-5 sm:p-6">
+
+        {/* Header */}
+        <div className="flex items-start justify-between gap-2">
+          <span
+            className="rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold"
+            style={{ color: accent, backgroundColor: `${accent}15` }}
+          >
+            {project.year}
+          </span>
+          {project.link && (
+            <span className="flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/8 px-2.5 py-0.5 text-[8px] uppercase tracking-[0.2em] text-emerald-400">
+              <span className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
+              Live
+            </span>
+          )}
+        </div>
+
+        {/* Título */}
+        <h3
+          className={`font-headline font-bold uppercase leading-[0.9] tracking-tight text-white transition-colors duration-300
+            ${featured ? "text-[2rem] sm:text-[2.6rem] lg:text-[3.2rem]" : "text-[1.5rem] sm:text-[1.75rem]"}`}
+        >
+          {project.title}
+        </h3>
+
+        {/* Descripción */}
+        <p className={`leading-relaxed text-white/40 transition-colors duration-300 group-hover:text-white/65
+          ${featured ? "text-sm sm:text-base" : "text-sm"}`}>
+          {desc}
+        </p>
+
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full px-2.5 py-1 text-[9px] uppercase tracking-[0.1em] transition-all duration-300"
+              style={{
+                border: `1px solid ${accent}20`,
+                color: `${accent}70`,
+                backgroundColor: `${accent}08`,
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Botones + línea */}
+        <div className="flex items-center gap-2 pt-1">
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`GitHub — ${project.title}`}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.03] text-white/40 transition-all duration-300 hover:border-white/35 hover:bg-white/8 hover:text-white active:scale-95"
+            >
+              <GitHubIcon />
+            </a>
+          )}
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Live — ${project.title}`}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-black transition-all duration-300 hover:scale-110 active:scale-95"
+              style={{ backgroundColor: "white" }}
+            >
+              <ArrowIcon />
+            </a>
+          )}
+          {/* Línea que crece al hover */}
+          <div
+            className="ml-1 h-px flex-1 origin-left scale-x-0 rounded-full transition-transform duration-500 group-hover:scale-x-100"
+            style={{ backgroundColor: `${accent}60` }}
+          />
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export default function Projects() {
   const { language } = useLanguage();
@@ -135,167 +269,23 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* List */}
+        {/* Bento grid */}
         <motion.div
-          variants={listVariants}
+          variants={gridVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.05 }}
+          className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
         >
-          {projectsList.map((project, index) => {
-            const desc = language === "es" ? project.descES : project.descEN;
-            const accent = BMW_ACCENTS[index % 3];
-
-            return (
-              <motion.div
-                key={project.id}
-                variants={rowVariants}
-                className="group relative border-b border-white/8 last:border-b-0"
-              >
-                {/* Hover: fondo full-ancho */}
-                <div className="pointer-events-none absolute inset-0 -mx-5 bg-white/[0.02] opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:-mx-6 md:-mx-24" />
-
-                {/* Borde izquierdo de acento BMW al hover */}
-                <div
-                  className="pointer-events-none absolute inset-y-0 left-0 -ml-5 w-[3px] rounded-r-full opacity-0 transition-all duration-400 group-hover:opacity-100 sm:-ml-6 md:-ml-24"
-                  style={{ backgroundColor: accent }}
-                />
-
-                <div className="relative py-5 md:py-7">
-
-                  {/* ── MOBILE: meta row (número · año + live) ── */}
-                  <div className="mb-3 flex items-center justify-between md:hidden">
-                    <span className="font-mono text-[11px] font-semibold text-white/20">
-                      {project.id}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] uppercase tracking-[0.25em] text-white/20">
-                        {project.year}
-                      </span>
-                      {project.link && (
-                        <span className="rounded-full border border-emerald-400/30 bg-emerald-400/8 px-2 py-0.5 text-[8px] uppercase tracking-[0.2em] text-emerald-400">
-                          Live
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* ── FILA PRINCIPAL ── */}
-                  <div className="flex flex-col gap-2.5 md:flex-row md:items-center md:gap-8 lg:gap-12">
-
-                    {/* Número — solo desktop */}
-                    <span
-                      className="hidden shrink-0 select-none font-headline text-5xl font-bold leading-none transition-colors duration-300 md:block md:w-16 lg:w-20 lg:text-6xl"
-                      style={{ color: `${accent}18` }}
-                    >
-                      {project.id}
-                    </span>
-
-                    {/* Contenido */}
-                    <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                      <div className="flex flex-wrap items-baseline gap-2.5">
-                        <h3 className="font-headline text-xl font-bold uppercase tracking-tight text-white transition-transform duration-300 group-hover:translate-x-1 sm:text-2xl md:text-3xl lg:text-4xl md:group-hover:translate-x-2">
-                          {project.title}
-                        </h3>
-                        {/* Live badge — solo desktop */}
-                        {project.link && (
-                          <span className="hidden rounded-full border border-emerald-400/25 bg-emerald-400/8 px-2.5 py-0.5 text-[9px] uppercase tracking-[0.2em] text-emerald-400 md:inline-flex">
-                            Live
-                          </span>
-                        )}
-                      </div>
-
-                      <p className="text-sm leading-relaxed text-white/38 transition-colors duration-300 group-hover:text-white/58 md:max-w-xl lg:max-w-2xl">
-                        {desc}
-                      </p>
-                    </div>
-
-                    {/* Año + botones — solo desktop */}
-                    <div className="hidden shrink-0 flex-col items-end gap-3 md:flex">
-                      <span className="text-[11px] uppercase tracking-[0.2em] text-white/20">
-                        {project.year}
-                      </span>
-                      <div className="flex gap-2">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`GitHub — ${project.title}`}
-                            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.03] text-white/40 transition-all duration-300 hover:border-white/35 hover:bg-white/8 hover:text-white"
-                          >
-                            <GitHubIcon />
-                          </a>
-                        )}
-                        {project.link && (
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Live — ${project.title}`}
-                            className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 hover:scale-110"
-                          >
-                            <ArrowIcon />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* ── MOBILE: tags + botones en fila inferior ── */}
-                  <div className="mt-3 flex items-center justify-between gap-3 md:hidden">
-                    <div className="flex min-w-0 flex-wrap gap-1.5">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[9px] uppercase tracking-[0.1em] text-white/30"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex shrink-0 gap-1.5">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`GitHub — ${project.title}`}
-                          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/12 bg-white/[0.03] text-white/40 transition-colors duration-200 active:bg-white/10"
-                        >
-                          <GitHubIcon />
-                        </a>
-                      )}
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Live — ${project.title}`}
-                          className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black active:scale-95"
-                        >
-                          <ArrowIcon />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Tags — solo desktop (debajo de descripción) */}
-                  <div className="mt-2.5 hidden flex-wrap gap-1.5 md:flex md:pl-24 lg:pl-32">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-white/8 bg-white/[0.02] px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-white/28 transition-colors duration-300 group-hover:border-white/14 group-hover:text-white/40"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                </div>
-              </motion.div>
-            );
-          })}
+          {projectsList.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              featured={index === 0}
+              language={language}
+            />
+          ))}
         </motion.div>
 
       </div>

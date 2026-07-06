@@ -10,16 +10,6 @@ const BMW_ACCENTS = ["#00A2E8", "#10069F", "#E32118"] as const;
 const projectsList = [
   {
     id: "01",
-    title: "fitW",
-    tags: ["PWA", "Full-Stack", "Next.js", "TypeScript"],
-    year: "2026",
-    link: "https://fitw.vercel.app",
-    github: "https://github.com/wilmixmerDev/fitW",
-    descES: "Aplicación nutricional para atletas con cálculo de macros, registro de alimentos y seguimiento de peso.",
-    descEN: "Nutritional app for athletes with macro tracking, food logging, and weight trend monitoring.",
-  },
-  {
-    id: "02",
     title: "JournalW",
     tags: ["Next.js", "TypeScript", "Supabase"],
     year: "2026",
@@ -27,6 +17,16 @@ const projectsList = [
     github: "https://github.com/wilmixmerDev/journalW",
     descES: "Diario de trading profesional para registrar operaciones, analizar métricas de rendimiento y alternar entre trading en vivo y backtesting.",
     descEN: "Professional trading journal to log trades, track performance metrics, and switch between live and backtest modes.",
+  },
+  {
+    id: "02",
+    title: "fitW",
+    tags: ["PWA", "Full-Stack", "Next.js", "TypeScript"],
+    year: "2026",
+    link: "https://fitw.vercel.app",
+    github: "https://github.com/wilmixmerDev/fitW",
+    descES: "Aplicación nutricional para atletas con cálculo de macros, registro de alimentos y seguimiento de peso.",
+    descEN: "Nutritional app for athletes with macro tracking, food logging, and weight trend monitoring.",
   },
   {
     id: "03",

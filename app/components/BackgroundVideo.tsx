@@ -23,8 +23,8 @@ export default function BackgroundVideo({ isLoaded }: { isLoaded: boolean }) {
   }, []);
 
   const videoSrc = isMobile
-    ? "/videos/ssstik.io_@sl0wguy_1774411355251.mp4"
-    : "/videos/BMW M3 Competition - 4K Cinematic Short Video.mp4";
+    ? "/videos/BMWcelular.mp4"
+    : "/videos/BMWpc.webm";
 
   useEffect(() => {
     if (isLoaded && videoRef.current) {
@@ -50,7 +50,7 @@ export default function BackgroundVideo({ isLoaded }: { isLoaded: boolean }) {
           className="h-full w-full object-cover"
           onError={() => setVideoFailed(true)}
         >
-          <source src={videoSrc} type="video/mp4" />
+          <source src={videoSrc} type={isMobile ? "video/mp4" : "video/webm"} />
         </video>
       </div>
 

@@ -120,15 +120,17 @@ function ProjectCard({ project, index, featured = false, language }: CardProps) 
   return (
     <motion.article
       variants={cardVariants}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] transition-all duration-500
-        hover:-translate-y-1.5 hover:border-white/18 hover:bg-white/[0.05]
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-black/55 backdrop-blur-md transition-colors duration-500
+        hover:border-white/18 hover:bg-black/65
         ${featured ? "sm:col-span-2 min-h-[280px]" : "min-h-[240px]"}`}
       style={{
         boxShadow: "0 0 0 0 transparent",
       }}
       whileHover={{
+        y: -6,
         boxShadow: `0 24px 60px -12px rgba(0,0,0,0.7), 0 0 0 1px ${accent}20`,
       }}
+      transition={{ type: "spring", stiffness: 300, damping: 24 }}
     >
       {/* Top accent bar */}
       <div className="h-[2px] w-full shrink-0" style={{ backgroundColor: accent }} />

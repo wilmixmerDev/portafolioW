@@ -63,9 +63,9 @@ export default function Navigation() {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            animate={{ opacity: 1, scale: 1, y: 0, transition: { type: "spring", duration: 0.45, bounce: 0.15 } }}
+            exit={{ opacity: 0, scale: 0.95, y: -10, transition: { type: "spring", duration: 0.25, bounce: 0 } }}
+            style={{ transformOrigin: "top" }}
             className="fixed left-4 right-4 top-20 z-40 rounded-xl border border-white/15 bg-black/80 p-4 backdrop-blur-2xl sm:hidden shadow-2xl"
           >
             <div className="flex flex-col gap-3">

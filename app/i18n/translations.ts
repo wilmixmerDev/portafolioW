@@ -62,7 +62,7 @@ export const translations = {
     },
     contact: {
       title: "TRABAJEMOS JUNTOS EN\nPROYECTOS INCREÍBLES",
-      subtitle: "Estoy abierto a oportunidades de prácticas profesionales, colaboraciones y proyectos desafiantes. Si tienes una idea o un proyecto en mente, me encantaría escucharte y explorar cómo podemos trabajar juntos para llevarla a la realidad.",
+      subtitle: "Estoy abierto a oportunidades laborales como desarrollador backend, frontend o full-stack, además de colaboraciones y proyectos desafiantes. Si tienes una idea o un proyecto en mente, me encantaría escucharte y explorar cómo podemos trabajar juntos para llevarla a la realidad.",
       formIntro: "También puedes enviarme un correo directo desde este formulario.",
       email: "Correo",
       phone: "Teléfono",

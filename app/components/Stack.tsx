@@ -121,7 +121,7 @@ export default function Stack() {
               }}
               className="group relative"
             >
-              <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] p-6 transition-all duration-500 hover:border-white/15 hover:bg-white/[0.05]">
+              <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-black/55 backdrop-blur-md p-6 transition-colors duration-500 hover:border-white/15 hover:bg-black/65">
 
                 {/* Barra de acento lateral */}
                 <div
@@ -184,11 +184,11 @@ export default function Stack() {
           transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-col gap-5 border-t border-white/8 pt-8 sm:flex-row sm:items-center sm:justify-between md:mt-14"
         >
-          <div className="max-w-sm">
-            <p className="mb-1 text-[10px] uppercase tracking-[0.3em] text-white/30">
+          <div className="max-w-sm drop-shadow-[0_4px_16px_rgba(0,0,0,1)]">
+            <p className="mb-1 text-[10px] uppercase tracking-[0.3em] text-white/45">
               {t.adaptabilityTitle}
             </p>
-            <p className="text-sm leading-relaxed text-white/50">
+            <p className="text-sm leading-relaxed text-white/70">
               {t.adaptability}
             </p>
           </div>
@@ -201,7 +201,7 @@ export default function Stack() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 + i * 0.07, duration: 0.35 }}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] text-white/45"
+                className="rounded-full border border-white/10 bg-black/50 backdrop-blur-md px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] text-white/45"
               >
                 {signal}
               </motion.span>

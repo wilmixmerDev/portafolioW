@@ -208,12 +208,12 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
             transition={{ duration: 0.8, delay: 1.2 }}
             className="mt-auto flex items-center justify-between border-t border-white/8 pt-5"
           >
-            <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
               {t.location}
             </span>
             <button
               onClick={() => scrollToSection("projects")}
-              className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-white/25 transition-colors duration-300 hover:text-white/60"
+              className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-white/40 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] transition-colors duration-300 hover:text-white/75"
             >
               <span>{t.scroll}</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="animate-bounce">

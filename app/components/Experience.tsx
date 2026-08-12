@@ -39,7 +39,7 @@ export default function Experience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] p-7 md:p-10"
+          className="relative overflow-hidden rounded-2xl border border-white/8 bg-black/55 backdrop-blur-md p-7 md:p-10"
         >
           <div className="absolute left-0 top-6 bottom-6 w-[2px] rounded-full bg-[#00A2E8]" />
 

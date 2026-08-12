@@ -6,6 +6,10 @@ import { useLanguage } from "../context/LanguageContext";
 import { BMWBadge } from "./BMWStripe";
 
 const BMW_ACCENTS = ["#00A2E8", "#10069F", "#E32118"] as const;
+/** Versiones aclaradas de BMW_ACCENTS para texto sobre fondo oscuro — el marino
+ * (#10069F) es ilegible como texto en su tono real; se usa el real solo en
+ * barras/bordes/glow, donde el contraste con el texto no importa. */
+const BMW_TEXT_ACCENTS = ["#73CCF2", "#7C76CA", "#F08580"] as const;
 
 const projectsList = [
   {
@@ -115,6 +119,7 @@ interface CardProps {
 
 function ProjectCard({ project, index, featured = false, language }: CardProps) {
   const accent = BMW_ACCENTS[index % 3];
+  const textAccent = BMW_TEXT_ACCENTS[index % 3];
   const desc = language === "es" ? project.descES : project.descEN;
 
   return (
@@ -160,7 +165,7 @@ function ProjectCard({ project, index, featured = false, language }: CardProps) 
         <div className="flex items-start justify-between gap-2">
           <span
             className="rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold"
-            style={{ color: accent, backgroundColor: `${accent}15` }}
+            style={{ color: textAccent, backgroundColor: `${accent}15` }}
           >
             {project.year}
           </span>
@@ -196,9 +201,9 @@ function ProjectCard({ project, index, featured = false, language }: CardProps) 
               key={tag}
               className="rounded-full px-2.5 py-1 text-[9px] uppercase tracking-[0.1em] transition-all duration-300"
               style={{
-                border: `1px solid ${accent}20`,
-                color: `${accent}70`,
-                backgroundColor: `${accent}08`,
+                border: `1px solid ${accent}30`,
+                color: textAccent,
+                backgroundColor: `${accent}10`,
               }}
             >
               {tag}

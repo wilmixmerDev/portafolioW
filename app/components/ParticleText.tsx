@@ -224,7 +224,7 @@ export default function ParticleText({ text }: { text: string }) {
   return (
     <div
       ref={containerRef}
-      className="relative h-[24vw] w-[110%] -translate-x-[5%] cursor-crosshair scale-105 sm:h-[10vw] sm:w-full sm:translate-x-0 md:h-37.5"
+      className="relative h-[24vw] w-[110%] -translate-x-[5%] cursor-crosshair scale-105 sm:h-[10vw] sm:w-full sm:translate-x-0 md:h-[clamp(8.5rem,10.5vw,14rem)]"
       onMouseEnter={() => {
         if (!isTouchDevice) setIsHovered(true);
       }}

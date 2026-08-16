@@ -50,6 +50,7 @@ export const translations = {
         "Reestructuración integral del software (UX/UI, backend y BD) aplicando buenas prácticas para corregir problemas de usabilidad del sistema anterior.",
         "Diseño y desarrollo de un módulo editorial que centraliza en la nube la publicación de libros de docentes.",
         "Gestión de bases de datos y documentación de arquitectura mediante diagramas técnicos.",
+        "Participo en reuniones con el dueño de proyecto para el levantamiento de requerimientos y organizo las tareas del equipo mediante ClickUp.",
         "Control de calidad (QA) para validar la estabilidad de nuevas funcionalidades antes del despliegue.",
       ],
     },

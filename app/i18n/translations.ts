@@ -12,7 +12,7 @@ export const translations = {
     hero: {
       subtitle: "Ingeniero de Sistemas | Desarrollador Full-Stack",
       title: ["WILMER", "IRIARTE", "DEVELOPER"] as const,
-      bio: "Desarrollador Full-Stack y Tecnólogo en Desarrollo de Software, cursando Ingeniería de Sistemas (10.º sem.) y trabajando como practicante en el mantenimiento y reestructuración de un sistema en producción. Construyo aplicaciones end-to-end con Java, Spring Boot, PHP/Laravel, React y Next.js. Inglés B2.",
+      bio: "Desarrollador Full-Stack y Tecnólogo en Desarrollo de Software, cursando Ingeniería de Sistemas (10.º sem.), con experiencia como practicante en el mantenimiento y reestructuración de un sistema en producción. Construyo aplicaciones end-to-end con Java, Spring Boot, PHP/Laravel, React y Next.js. Inglés B2.",
       location: "Colombia / Disponible Globalmente",
       showreel: "Ver Proyectos",
       quickContact: "Contacto rápido",
@@ -39,19 +39,31 @@ export const translations = {
     },
     experience: {
       title: "Experiencia",
-      subtitle: "2026 — Actualidad",
-      role: "Practicante de Desarrollo de Software",
-      company: "Fundación Universitaria Tecnológico Comfenalco",
-      location: "Cartagena, Colombia",
-      period: "Febrero 2026 — Actualidad",
-      badge: "Actual",
-      bullets: [
-        "Mantenimiento y evolución del sistema TecnoPro, automatizando procesos manuales y desarrollando nuevas funcionalidades.",
-        "Reestructuración integral del software (UX/UI, backend y BD) aplicando buenas prácticas para corregir problemas de usabilidad del sistema anterior.",
-        "Diseño y desarrollo de un módulo editorial que centraliza en la nube la publicación de libros de docentes.",
-        "Gestión de bases de datos y documentación de arquitectura mediante diagramas técnicos.",
-        "Participo en reuniones con el dueño de proyecto para el levantamiento de requerimientos y organizo las tareas del equipo mediante ClickUp.",
-        "Control de calidad (QA) para validar la estabilidad de nuevas funcionalidades antes del despliegue.",
+      subtitle: "2026",
+      jobs: [
+        {
+          role: "Desarrollador Full-Stack",
+          company: "Araujo & Segovia",
+          location: "Cartagena, Colombia",
+          period: "Septiembre 2026 — Actualidad",
+          bullets: [
+            "Incorporación reciente al equipo de tecnología, en proceso de adaptación a los sistemas y procesos de la inmobiliaria.",
+          ],
+        },
+        {
+          role: "Practicante de Desarrollo de Software",
+          company: "Fundación Universitaria Tecnológico Comfenalco",
+          location: "Cartagena, Colombia",
+          period: "Febrero 2026 — Agosto 2026",
+          bullets: [
+            "Fui responsable del mantenimiento y evolución del sistema TecnoPro, automatizando procesos manuales y desarrollando nuevas funcionalidades.",
+            "Participé en la reestructuración integral del software (UX/UI, backend y BD), aplicando buenas prácticas para corregir problemas de usabilidad del sistema anterior.",
+            "Diseñé y desarrollé un módulo editorial que centraliza en la nube la publicación de libros de docentes.",
+            "Gestioné bases de datos y documenté la arquitectura del sistema mediante diagramas técnicos.",
+            "Participé en reuniones con el dueño de proyecto para el levantamiento de requerimientos y organicé las tareas del equipo mediante ClickUp.",
+            "Apoyé tareas de control de calidad (QA) para validar la estabilidad de nuevas funcionalidades antes de su despliegue.",
+          ],
+        },
       ],
     },
     engine: {
@@ -105,7 +117,7 @@ export const translations = {
     hero: {
       subtitle: "Systems Engineer | Full-Stack Developer",
       title: ["WILMER", "IRIARTE", "DEVELOPER"] as const,
-      bio: "Full-Stack developer and Software Development Technologist, pursuing a Systems Engineering degree and working as a development intern maintaining and restructuring a live production system. I build end-to-end apps with Java, Spring Boot, PHP/Laravel, React, and Next.js. B2 English.",
+      bio: "Full-Stack developer and Software Development Technologist, pursuing a Systems Engineering degree, with experience as a development intern maintaining and restructuring a live production system. I build end-to-end apps with Java, Spring Boot, PHP/Laravel, React, and Next.js. B2 English.",
       location: "Colombia / Available Globally",
       showreel: "View Projects",
       quickContact: "Quick contact",
@@ -132,18 +144,31 @@ export const translations = {
     },
     experience: {
       title: "Experience",
-      subtitle: "2026 — Present",
-      role: "Software Development Intern",
-      company: "Fundación Universitaria Tecnológico Comfenalco",
-      location: "Cartagena, Colombia",
-      period: "February 2026 — Present",
-      badge: "Current",
-      bullets: [
-        "Maintenance and evolution of the TecnoPro system, automating manual processes and developing new features.",
-        "Full software restructuring (UX/UI, backend and database) applying best practices to fix usability issues from the previous system.",
-        "Design and development of an editorial module that centralizes cloud-based faculty book publishing.",
-        "Database management and architecture documentation through technical diagrams.",
-        "Quality assurance (QA) to validate stability of new features before deployment.",
+      subtitle: "2026",
+      jobs: [
+        {
+          role: "Full-Stack Developer",
+          company: "Araujo & Segovia",
+          location: "Cartagena, Colombia",
+          period: "September 2026 — Present",
+          bullets: [
+            "Recently joined the technology team, currently getting up to speed on the agency's systems and processes.",
+          ],
+        },
+        {
+          role: "Software Development Intern",
+          company: "Fundación Universitaria Tecnológico Comfenalco",
+          location: "Cartagena, Colombia",
+          period: "February 2026 — August 2026",
+          bullets: [
+            "I was responsible for the maintenance and evolution of the TecnoPro system, automating manual processes and developing new features.",
+            "I took part in the full software restructuring (UX/UI, backend and database), applying best practices to fix usability issues from the previous system.",
+            "I designed and built an editorial module that centralizes cloud-based faculty book publishing.",
+            "I managed the databases and documented the system architecture through technical diagrams.",
+            "I took part in requirement-gathering meetings with the project owner and organized the team's tasks using ClickUp.",
+            "I supported quality assurance (QA) efforts to validate the stability of new features before deployment.",
+          ],
+        },
       ],
     },
     engine: {
